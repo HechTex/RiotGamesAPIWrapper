@@ -45,8 +45,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+<<<<<<< HEAD
     <Compile Include="KeyLoader\KeyLoaderFactory.cs" />
+=======
     <Compile Include="APIConstants.cs" />
+>>>>>>> 512b83310107b95af5a4fe03e985ca84541fa6df
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RiotGamesAPI.cs" />
   </ItemGroup>

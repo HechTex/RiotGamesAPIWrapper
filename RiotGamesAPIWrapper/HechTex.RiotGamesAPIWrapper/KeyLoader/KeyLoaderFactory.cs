@@ -1,11 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.IO;
 using System.Text.RegularExpressions;
 
-namespace HechTex.RiotGamesAPIWrapper.KeyLoader
+namespace HechTex.RiotGamesAPI.KeyLoader
 {
     /// <summary>
     /// Factory class to get the API-Key from an input.
@@ -17,6 +14,7 @@ namespace HechTex.RiotGamesAPIWrapper.KeyLoader
         // TODO VERIFY!
         private readonly static Regex API_PATTERN = new Regex(@"[\da-z]{8}(?:-[\da-z]{4}){3}[\da-z]{12}",
                                                             RegexOptions.Compiled);
+
         /// <summary>
         /// Filters the key from the input. This might
         /// be the key itself or a filename.
