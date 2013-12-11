@@ -6,7 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using RestSharp;
 
-namespace HechTex.RiotGamesAPIWrapper
+namespace HechTex.RiotGamesAPI
 {
     /// <summary>
     /// Main access point to the HechTex.RiotGamesAPIWrapper library. 

@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 // ReSharper disable once CheckNamespace
-namespace HechTex.RiotGamesAPIWrapper.APIConstants
+namespace HechTex.RiotGamesAPI.APIConstants
 {
     public enum MatchmakingQueues
     {
