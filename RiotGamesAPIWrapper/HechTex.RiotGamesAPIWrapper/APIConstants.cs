@@ -9,7 +9,19 @@ namespace HechTex.RiotGamesAPIWrapper.APIConstants
 {
     public enum MatchmakingQueues
     {
-        Normal5v5Blind = 2
+        Normal5v5Blind          = 2,
+        RankedSolo5v5           = 4,
+        CoopVsAI5v5             = 7,
+        Normal3v3               = 8,
+        Normal5v5Draft          = 14,
+        Dominion5v5Blind        = 16,
+        Dominion5v5Draft        = 17,
+        DominionCoopVsAI        = 25,
+        RankedTeam3v3           = 41,
+        RankedTeam5v5           = 42,
+        TwistedTreelineCoopVsAI = 52,
+        ARAM                    = 65,
+        ARAMCoopVsAI            = 67
     }
 
     public enum Maps
