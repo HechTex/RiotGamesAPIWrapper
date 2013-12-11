@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2013
 VisualStudioVersion = 12.0.21005.1
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HechTex.RiotGamesAPIWrapper", "HechTex.RiotGameAPIWrapper\HechTex.RiotGamesAPIWrapper.csproj", "{4319DCD7-EE69-4194-9ECA-828B02FD05AF}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HechTex.RiotGamesAPIWrapper", "HechTex.RiotGamesAPIWrapper\HechTex.RiotGamesAPIWrapper.csproj", "{4319DCD7-EE69-4194-9ECA-828B02FD05AF}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
