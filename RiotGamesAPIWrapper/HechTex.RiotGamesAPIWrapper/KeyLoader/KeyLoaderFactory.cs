@@ -1,6 +1,10 @@
 ﻿using System;
 using System.IO;
+using System.Runtime.CompilerServices;
 using System.Text.RegularExpressions;
+
+// Access for tests granted.
+[assembly: InternalsVisibleTo("HechTex.Test")]
 
 namespace HechTex.RiotGamesAPI.KeyLoader
 {
@@ -12,7 +16,7 @@ namespace HechTex.RiotGamesAPI.KeyLoader
     internal class KeyLoaderFactory
     {
         // TODO VERIFY!
-        private readonly static Regex API_PATTERN = new Regex(@"[\da-z]{8}(?:-[\da-z]{4}){3}[\da-z]{12}",
+        private readonly static Regex API_PATTERN = new Regex(@"[\da-z]{8}(?:-[\da-z]{4}){3}-[\da-z]{12}",
                                                             RegexOptions.Compiled);
 
         /// <summary>
