@@ -40,9 +40,10 @@ namespace HechTex.RiotGamesAPIWrapper
         /// .Key is the string in the URL to replace, .Value is the value to replace the segment with
         /// </param>
         /// <returns></returns>
-        internal T CallAPI<T>(string url, IDictionary<string, string> urlSegments) where T : new()
+        internal T CallAPI<T>(string url, IDictionary<string, string> urlSegments,
+            string rootelement) where T : new()
         {
-            var request = new RestRequest(url, Method.GET) { RootElement = "champions" };   // wait.. this shouldnt be here! callee should specify this
+            var request = new RestRequest(url, Method.GET) { RootElement = rootelement };
             foreach (var setting in urlSegments)
                 request.AddUrlSegment(setting.Key, setting.Value);
 
@@ -76,7 +77,7 @@ namespace HechTex.RiotGamesAPIWrapper
         {
             var urlsegs = new Dictionary<string, string> {{"region", GetRegionString(region)}}; // dat syntax
             // TODO | dj | use Cache here!!!
-            return CallAPI<List<Champion>>(API_URL_CHAMPION, urlsegs);
+            return CallAPI<List<Champion>>(API_URL_CHAMPION, urlsegs, "champions");
         }
 
         // TODO | dj | I want a method to get the Champion by ~name or at least id!
