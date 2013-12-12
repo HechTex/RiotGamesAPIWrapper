@@ -6,6 +6,8 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "lib", "lib", "{1F0E17CA-439A-499F-9164-1265B75E1311}"
 	ProjectSection(SolutionItems) = preProject
 		lib\Csharp-Extensions.dll = lib\Csharp-Extensions.dll
+		lib\Csharp-Extensions.pdb = lib\Csharp-Extensions.pdb
+		lib\Csharp-Extensions.XML = lib\Csharp-Extensions.XML
 	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HechTex.Test", "HechTex.Test\HechTex.Test.csproj", "{4E20990E-FA31-420C-9327-8E1DF0F6A1A1}"

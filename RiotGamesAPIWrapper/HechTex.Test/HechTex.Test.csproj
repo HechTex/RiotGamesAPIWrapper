@@ -38,7 +38,8 @@
     <StartupObject>HechTex.Test.Program</StartupObject>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Csharp-Extensions">
+    <Reference Include="Csharp-Extensions, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
       <HintPath>..\lib\Csharp-Extensions.dll</HintPath>
     </Reference>
     <Reference Include="System" />

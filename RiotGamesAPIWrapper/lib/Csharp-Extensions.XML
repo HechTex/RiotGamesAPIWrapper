@@ -1,0 +1,103 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Csharp-Extensions</name>
+    </assembly>
+    <members>
+        <member name="M:CsExtensions.ArrayExtensions.Extend``1(``0[],``0[])">
+            <summary>
+            Extends the first array by
+            adding the second one to it.<para />
+            **Out of place**<para />
+            This does not remove <code>null</code>s.
+            </summary>
+            <typeparam name="T">any type</typeparam>
+            <param name="firstArray">The array to be first in the new one.</param>
+            <param name="secondArray">The array to be set behind the first one.</param>
+            <returns>The new array being the concatination of both given arrays.</returns>
+        </member>
+        <member name="T:CsExtensions.Console.DynamicTestConsole">
+            <summary>
+            A dynamic method to list all
+            <code>public static</code> methods 
+            of the given classe. Those then can
+            be executed by typing the corresponding
+            number.<para />
+            Use <code>Comment</code>-Attributes
+            to write a comment to those methods.
+            This makes the identification much easier.
+            </summary>
+        </member>
+        <member name="M:CsExtensions.Console.DynamicTestConsole.Start``1">
+            <summary>
+            Reads all <code>public static</code> methods
+            of <code>T</code>, lists them and waits for
+            the users input.
+            </summary>
+            <typeparam name="T">The class to be analyzed.
+            Most likely the Program.cs, from which the
+            Method is called.</typeparam>
+        </member>
+        <member name="T:CsExtensions.Console.DynamicTestConsole.Comment">
+            <summary>
+            Simple Comment-Attribute for use
+            with the DynamicTestConsole.<para />
+            For use, just put <code>[Comment("Your comment here")]</code>
+            above the desired method. It then will be
+            displayed in the list, given by DynamicTestConsole.Start&lt;T&gt;().
+            </summary>
+        </member>
+        <member name="M:CsExtensions.Console.DynamicTestConsole.Comment.#ctor(System.String)">
+            <summary>
+            Create a comment.
+            </summary>
+            <param name="message">The message to be displayed.</param>
+        </member>
+        <member name="M:CsExtensions.GeneralExtensions.Raise``1(System.EventHandler{``0},System.Object,``0)">
+            <summary>
+            Easy and save method to raise
+            an event. Encapsules the null-check.
+            </summary>
+            <typeparam name="T">EventArgs-type</typeparam>
+            <param name="handler">The event itself.</param>
+            <param name="sender">The sender.</param>
+            <param name="ev">The EventArgs.</param>
+        </member>
+        <member name="M:CsExtensions.StringExtensions.Multiply(System.String,System.Int32)">
+            <summary>
+            Multiplies the string.<para />
+            e.g. str = "/\", multiplier = 4<para/>
+            result: "/\/\/\/\";
+            </summary>
+            <param name="str">String to be multiplied</param>
+            <param name="multiplier">Count of multiplications/concatenations.</param>
+            <returns>The new string.</returns>
+        </member>
+        <member name="M:CsExtensions.StringExtensions.Split(System.String,System.String)">
+            <summary>
+            Short access to .Split, splitting only at
+            splitSeq and removing empty entries.
+            </summary>
+            <param name="str">String to split.</param>
+            <param name="splitSeq">The delimeter-string.</param>
+            <returns>Array of strings.</returns>
+        </member>
+        <member name="M:CsExtensions.StringExtensions.Format(System.String,System.Object[])">
+            <summary>
+            Short form of String.Format(...).
+            </summary>
+            <param name="str">Format-string</param>
+            <param name="objs">Values to appear in string.</param>
+            <returns>Formatted string.</returns>
+        </member>
+        <member name="M:CsExtensions.StringExtensions.ParseToEnum``1(System.String)">
+            <summary>
+            Parses the given string to the
+            required enum, if possible.
+            </summary>
+            <typeparam name="T">Type of the desired enum</typeparam>
+            <param name="str">string to parse</param>
+            <returns>The resulting enum.</returns>
+        </member>
+    </members>
+</doc>
