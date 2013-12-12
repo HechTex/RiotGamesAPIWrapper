@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using HechTex.RiotGamesAPI.KeyLoader;
 using RestSharp;
 
@@ -10,6 +11,8 @@ namespace HechTex.RiotGamesAPI
     /// </summary>
     public sealed class RiotGamesAPI
     {
+        private const string DEFAULT_APIPATH = @"..\..\..\..\api.key";
+
         private const string API_BASE_URL = @"http://prod.api.pvp.net/";
 
         // value fields
@@ -57,7 +60,9 @@ namespace HechTex.RiotGamesAPI
         public RiotGamesAPI(string apiKey)
         {
             // detect key via KeyLoaderFactory
-            _apiKey = KeyLoaderFactory.GetKey(apiKey);
+            if (String.IsNullOrEmpty(apiKey))
+                apiKey = System.IO.Path.GetFullPath(DEFAULT_APIPATH);
+            _apiKey = KeyLoaderFactory.GetKey(apiKey); // TODO | dj | throws exceptions. (to be written in summary)
         }
     }
 }
