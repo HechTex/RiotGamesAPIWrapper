@@ -42,8 +42,7 @@ namespace HechTex.RiotGamesAPIWrapper
         /// <returns></returns>
         internal T CallAPI<T>(string url, IDictionary<string, string> urlSegments) where T : new()
         {
-            var request = new RestRequest(url, Method.GET);
-            request.RootElement = "champions";
+            var request = new RestRequest(url, Method.GET) { RootElement = "champions" };   // wait.. this shouldnt be here! callee should specify this
             foreach (var setting in urlSegments)
                 request.AddUrlSegment(setting.Key, setting.Value);
 
@@ -75,8 +74,7 @@ namespace HechTex.RiotGamesAPIWrapper
         /// <returns>List of Champions.</returns>
         public IList<Champion> GetChampions(Regions region)
         {
-            var urlsegs = new Dictionary<string, string>();
-            urlsegs.Add("region", GetRegionString(region));
+            var urlsegs = new Dictionary<string, string> {{"region", GetRegionString(region)}}; // dat syntax
             // TODO | dj | use Cache here!!!
             return CallAPI<List<Champion>>(API_URL_CHAMPION, urlsegs);
         }

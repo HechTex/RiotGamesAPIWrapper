@@ -29,17 +29,16 @@ namespace HechTex.RiotGamesAPIWrapper.KeyLoader
         {
             if (API_PATTERN.IsMatch(input))
                 return FromKey(input);
-            else
-            {
-                // TODO already throw Exception if input no
-                //      key and no uri!
-                Uri u = new Uri(input);
-                // TODO if (!u.IsAbsoluteUri) throw Exception("NOPE");
-                if (u.IsFile)
-                    return FromLocalFile(input);
-                else
-                    return FromRemote(u);
-            }
+
+            // TODO already throw Exception if input no
+            //      key and no uri!
+            Uri u = new Uri(input);
+            // TODO if (!u.IsAbsoluteUri) throw Exception("NOPE");
+            if (u.IsFile)
+                return FromLocalFile(input);
+            
+            // is its not a local file it must be a remote
+            return FromRemote(u);
         }
 
         private static string FromKey(string input)
