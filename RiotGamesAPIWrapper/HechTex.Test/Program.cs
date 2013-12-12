@@ -32,7 +32,7 @@ namespace HechTex.Test
             }
         }
 
-        [DynamicTestConsole.Comment("Test to get all champions")]
+        [DynamicTestConsole.Comment("Test to get all champions.")]
         public static void TestGetAllChampions()
         {
             RiotGamesAPI api = new RiotGamesAPI(null);
@@ -40,6 +40,16 @@ namespace HechTex.Test
             Console.WriteLine("Champions:");
             foreach (var champ in result)
                 Console.WriteLine(champ.GetInfoString());
+        }
+
+        [DynamicTestConsole.Comment("Test to get rune pages of a summoner.")]
+        public static void TestGetRunePages()
+        {
+            RiotGamesAPI api = new RiotGamesAPI(null);
+            var result = api.GetRunePages(Regions.EUW, 26231463);
+            Console.WriteLine("Runepages:");
+            foreach (var page in result)
+                Console.WriteLine(page.GetInfoString());
         }
     }
 }

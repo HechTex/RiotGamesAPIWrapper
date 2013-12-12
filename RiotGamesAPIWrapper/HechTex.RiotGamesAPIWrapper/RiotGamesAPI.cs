@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using HechTex.RiotGamesAPIWrapper.APIConstants;
 using HechTex.RiotGamesAPIWrapper.KeyLoader;
 using HechTex.RiotGamesAPIWrapper.Model;
+using HechTex.RiotGamesAPIWrapper.Model.Runes;
 using RestSharp;
 
 namespace HechTex.RiotGamesAPIWrapper
@@ -17,6 +18,7 @@ namespace HechTex.RiotGamesAPIWrapper
 
         private const string API_BASE_URL = @"https://prod.api.pvp.net/";
         private const string API_URL_CHAMPION = @"api/lol/{region}/v1.1/champion";
+        private const string API_URL_RUNEPAGES = @"api/lol/{region}/v1.1/summoner/{summonerId}/runes";
 
         // value fields
         private string _apiKey;
@@ -39,6 +41,7 @@ namespace HechTex.RiotGamesAPIWrapper
         /// The URL segments to replace. 
         /// .Key is the string in the URL to replace, .Value is the value to replace the segment with
         /// </param>
+        /// <param name="rootelement">Rootelement at which the deserialization starts.</param>
         /// <returns></returns>
         internal T CallAPI<T>(string url, IDictionary<string, string> urlSegments,
             string rootelement) where T : new()
@@ -72,12 +75,28 @@ namespace HechTex.RiotGamesAPIWrapper
         /// Returns the list of all champions.
         /// Depending on cache-mode, this might take a moment.
         /// </summary>
+        /// <param name="region">Region to search in.</param>
         /// <returns>List of Champions.</returns>
         public IList<Champion> GetChampions(Regions region)
         {
             var urlsegs = new Dictionary<string, string> {{"region", GetRegionString(region)}}; // dat syntax
             // TODO | dj | use Cache here!!!
             return CallAPI<List<Champion>>(API_URL_CHAMPION, urlsegs, "champions");
+        }
+
+        /// <summary>
+        /// Returns the list of runepages of a summoner.
+        /// Depending on cache-mode, this might take a moment.
+        /// </summary>
+        /// <param name="region">Region to search in.</param>
+        /// <param name="summonerId">The summoner's id.</param>
+        /// <returns>List of RunePages.</returns>
+        public IList<RunePage> GetRunePages(Regions region, int summonerId)
+        {
+            var urlsegs = new Dictionary<string, string> {
+                { "region", GetRegionString(region) }, { "summonerId", summonerId.ToString() } };
+            // with this, no RunePages-class is needed.
+            return CallAPI<List<RunePage>>(API_URL_RUNEPAGES, urlsegs, "pages");
         }
 
         // TODO | dj | I want a method to get the Champion by ~name or at least id!
