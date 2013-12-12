@@ -6,7 +6,7 @@ using System.Text.RegularExpressions;
 // Access for tests granted.
 [assembly: InternalsVisibleTo("HechTex.Test")]
 
-namespace HechTex.RiotGamesAPI.KeyLoader
+namespace HechTex.RiotGamesAPIWrapper.KeyLoader
 {
     /// <summary>
     /// Factory class to get the API-Key from an input.

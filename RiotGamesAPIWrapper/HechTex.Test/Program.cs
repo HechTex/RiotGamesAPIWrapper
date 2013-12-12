@@ -3,7 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using CsExtensions.Console;
-using HechTex.RiotGamesAPI.KeyLoader;
+using HechTex.RiotGamesAPIWrapper;
+using HechTex.RiotGamesAPIWrapper.APIConstants;
+using HechTex.RiotGamesAPIWrapper.KeyLoader;
+using HechTex.RiotGamesAPIWrapper.Model;
 
 namespace HechTex.Test
 {
@@ -26,6 +29,16 @@ namespace HechTex.Test
             } catch (Exception e) {
                 Console.WriteLine(e.Message);
             }
+        }
+
+        [DynamicTestConsole.Comment("Test to get all champions")]
+        public static void TestGetAllChampions()
+        {
+            RiotGamesAPI api = new RiotGamesAPI(null);
+            var result = api.GetChampions(Regions.EUW);
+            Console.WriteLine("Champions:");
+            foreach (var champ in result)
+                Console.WriteLine(champ.ToString());
         }
     }
 }

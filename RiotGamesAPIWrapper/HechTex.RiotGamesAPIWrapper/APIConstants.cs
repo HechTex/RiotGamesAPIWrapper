@@ -1,5 +1,5 @@
 ﻿// ReSharper disable once CheckNamespace
-namespace HechTex.RiotGamesAPI.APIConstants
+namespace HechTex.RiotGamesAPIWrapper.APIConstants
 {
     public enum MatchmakingQueues
     {

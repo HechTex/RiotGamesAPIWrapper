@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace HechTex.RiotGamesAPI.Model
+namespace HechTex.RiotGamesAPIWrapper.Model
 {
     public class Champion
     {
@@ -63,5 +63,21 @@ namespace HechTex.RiotGamesAPI.Model
         /// Ranked play enabled flag.
         /// </summary>
         public bool RankedPlayEnabled { get; set; }
+
+        public override string ToString()
+        {
+            StringBuilder sb = new StringBuilder();
+            sb.AppendLine(this.GetType().Name + " {");
+            
+            var props = this.GetType().GetProperties();
+            int widthConst = props.Max(p => p.Name.Length);
+            foreach (var prop in props)
+            {
+                sb.AppendLine("\t" + prop.Name.PadRight(widthConst) + " : " + prop.GetValue(this));
+            }
+
+            sb.AppendLine("}");
+            return sb.ToString();
+        }
     }
 }
