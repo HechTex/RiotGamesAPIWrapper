@@ -64,20 +64,5 @@ namespace HechTex.RiotGamesAPIWrapper.Model
         /// </summary>
         public bool RankedPlayEnabled { get; set; }
 
-        public override string ToString()
-        {
-            StringBuilder sb = new StringBuilder();
-            sb.AppendLine(this.GetType().Name + " {");
-            
-            var props = this.GetType().GetProperties();
-            int widthConst = props.Max(p => p.Name.Length);
-            foreach (var prop in props)
-            {
-                sb.AppendLine("\t" + prop.Name.PadRight(widthConst) + " : " + prop.GetValue(this));
-            }
-
-            sb.AppendLine("}");
-            return sb.ToString();
-        }
     }
 }

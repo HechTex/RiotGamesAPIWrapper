@@ -63,6 +63,15 @@
             <param name="sender">The sender.</param>
             <param name="ev">The EventArgs.</param>
         </member>
+        <member name="M:CsExtensions.GeneralExtensions.GetInfoString``1(``0)">
+            <summary>
+            Returns a string for pretty-printing.
+            Consists of classname, fields and properties.
+            </summary>
+            <typeparam name="T">The object's type.</typeparam>
+            <param name="obj">The object.</param>
+            <returns>Pretty string for output with public info about object.</returns>
+        </member>
         <member name="M:CsExtensions.StringExtensions.Multiply(System.String,System.Int32)">
             <summary>
             Multiplies the string.<para />

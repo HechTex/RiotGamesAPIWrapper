@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using CsExtensions.Console;
+using CsExtensions;
 using HechTex.RiotGamesAPIWrapper;
 using HechTex.RiotGamesAPIWrapper.APIConstants;
 using HechTex.RiotGamesAPIWrapper.KeyLoader;
@@ -38,7 +39,7 @@ namespace HechTex.Test
             var result = api.GetChampions(Regions.EUW);
             Console.WriteLine("Champions:");
             foreach (var champ in result)
-                Console.WriteLine(champ.ToString());
+                Console.WriteLine(champ.GetInfoString());
         }
     }
 }
