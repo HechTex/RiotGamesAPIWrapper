@@ -36,4 +36,14 @@ namespace HechTex.RiotGamesAPI.APIConstants
         ARAM        = 2,
         TURORIAL    = 3
     }
+
+    public enum Regions
+    {
+        /// Use with Enum.getName(...).ToLower() for requests.
+        BR      = 0,
+        EUNE    = 1,
+        EUW     = 2,
+        NA      = 3,
+        TR      = 4
+    }
 }
