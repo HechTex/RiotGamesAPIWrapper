@@ -1,10 +1,6 @@
 ﻿using System;
 using System.IO;
-using System.Runtime.CompilerServices;
 using System.Text.RegularExpressions;
-
-// Access for tests granted.
-[assembly: InternalsVisibleTo("HechTex.Test")]
 
 namespace HechTex.RiotGamesAPIWrapper.KeyLoader
 {
@@ -30,14 +26,15 @@ namespace HechTex.RiotGamesAPIWrapper.KeyLoader
             if (API_PATTERN.IsMatch(input))
                 return FromKey(input);
 
-            // TODO already throw Exception if input no
-            //      key and no uri!
+            // TODO already throw Exception if input no key and no uri!
+
             Uri u = new Uri(input);
             // TODO if (!u.IsAbsoluteUri) throw Exception("NOPE");
+            //      or convert with System.Path to Absolute?!
             if (u.IsFile)
                 return FromLocalFile(input);
             
-            // is its not a local file it must be a remote
+            // if it's not a local file it must be a remote
             return FromRemote(u);
         }
 
