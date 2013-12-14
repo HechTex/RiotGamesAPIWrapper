@@ -57,11 +57,10 @@
     <Compile Include="Model\Champion.cs" />
     <Compile Include="Model\Masteries\MasteryPage.cs" />
     <Compile Include="Model\Masteries\Mastery.cs" />
-    <Compile Include="Model\Masteries\MasteryPages.cs" />
     <Compile Include="Model\Runes\Rune.cs" />
     <Compile Include="Model\Runes\RunePage.cs" />
-    <Compile Include="Model\Runes\RunePages.cs" />
     <Compile Include="Model\Runes\RuneSlot.cs" />
+    <Compile Include="Model\Summoner.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RiotGamesAPI.cs" />
   </ItemGroup>
