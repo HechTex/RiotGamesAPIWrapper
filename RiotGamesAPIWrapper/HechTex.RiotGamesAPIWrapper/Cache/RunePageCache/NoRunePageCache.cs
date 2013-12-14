@@ -20,7 +20,7 @@ namespace HechTex.RiotGamesAPIWrapper.Cache.RunePageCache
         /// queries/calls to the API itself.</param>
         /// <param name="region">The region.</param>
         /// <param name="summonerId">The summoner's id.</param>
-        internal NoRunePageCache(APICaller apiCaller, Regions region, int summonerId)
+        internal NoRunePageCache(APICaller apiCaller, Regions region, long summonerId)
             : base(apiCaller, region, summonerId.ToString())
         {
             CacheMethod = CacheMethod.NoCache;

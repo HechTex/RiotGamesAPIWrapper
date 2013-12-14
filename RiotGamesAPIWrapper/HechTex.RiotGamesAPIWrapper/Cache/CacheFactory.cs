@@ -99,7 +99,7 @@ namespace HechTex.RiotGamesAPIWrapper.Cache
         /// request. Please keep this in mind.</param>
         /// <returns>List of all champions.</returns>
         // TODO | dj | Not implemented cache-methods shouldn't exist!
-        internal IList<RunePage> GetRunePages(Regions region, int summonerId,
+        internal IList<RunePage> GetRunePages(Regions region, long summonerId,
             CacheMethod cacheMethod = CacheMethod.Default)
         {
             AbstractCache<IList<RunePage>> acc;

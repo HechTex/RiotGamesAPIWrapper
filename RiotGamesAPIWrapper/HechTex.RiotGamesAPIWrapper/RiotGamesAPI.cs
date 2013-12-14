@@ -68,7 +68,7 @@ namespace HechTex.RiotGamesAPIWrapper
         /// to search.</param>
         /// <returns>List of RunePages.<para/>
         /// Returns null, if no items/no connection.</returns>
-        public IList<RunePage> GetRunePages(Regions region, int summonerId)
+        public IList<RunePage> GetRunePages(Regions region, long summonerId)
         {
             return _cacheFactory.GetRunePages(region, summonerId);
         }
