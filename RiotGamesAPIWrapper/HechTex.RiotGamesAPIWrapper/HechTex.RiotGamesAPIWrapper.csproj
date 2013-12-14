@@ -53,6 +53,7 @@
     <Compile Include="Model\Runes\Rune.cs" />
     <Compile Include="Model\Runes\RunePage.cs" />
     <Compile Include="Model\Runes\RuneSlot.cs" />
+    <Compile Include="Model\Summoner.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RiotGamesAPI.cs" />
   </ItemGroup>
