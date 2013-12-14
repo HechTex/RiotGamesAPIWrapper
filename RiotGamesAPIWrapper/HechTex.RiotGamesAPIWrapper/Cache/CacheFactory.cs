@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using CsExtensions;
 using HechTex.RiotGamesAPIWrapper.APIConstants;
 using HechTex.RiotGamesAPIWrapper.Cache.ChampionCache;
+using HechTex.RiotGamesAPIWrapper.Cache.RunePageCache;
 using HechTex.RiotGamesAPIWrapper.Model;
 using HechTex.RiotGamesAPIWrapper.Model.Runes;
 
@@ -71,11 +72,11 @@ namespace HechTex.RiotGamesAPIWrapper.Cache
             {
                 switch (cacheMethod)
                 {
-                    case CacheMethod.NoCache:
-                        acc = new NoChampionCache(_apiCaller, region);
-                        break;
                     case CacheMethod.Default:
                         acc = new DefaultChampionCache(_apiCaller, region);
+                        break;
+                    case CacheMethod.NoCache:
+                        acc = new NoChampionCache(_apiCaller, region);
                         break;
                     default:
                         throw new NotSupportedException(
@@ -109,11 +110,12 @@ namespace HechTex.RiotGamesAPIWrapper.Cache
             {
                 switch (cacheMethod)
                 {
-                    // TODO | dj | build those classes.
                     case CacheMethod.Default:
-                        //break;
+                        acc = new DefaultRunePageCache(_apiCaller, region, summonerId);
+                        break;
                     case CacheMethod.NoCache:
-                        //break;
+                        acc = new NoRunePageCache(_apiCaller, region, summonerId);
+                        break;
                     default:
                         throw new NotSupportedException(
                             CACHEMETHOD_NOTSUPORTED.Format(cacheMethod));

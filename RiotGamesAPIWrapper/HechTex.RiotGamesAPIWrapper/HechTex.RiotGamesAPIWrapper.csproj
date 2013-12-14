@@ -50,6 +50,8 @@
     <Compile Include="Cache\ChampionCache\DefaultChampionCache.cs" />
     <Compile Include="Cache\AbstractCache.cs" />
     <Compile Include="Cache\ChampionCache\NoChampionCache.cs" />
+    <Compile Include="Cache\RunePageCache\DefaultRunePageCache.cs" />
+    <Compile Include="Cache\RunePageCache\NoRunePageCache.cs" />
     <Compile Include="KeyLoader\KeyLoaderFactory.cs" />
     <Compile Include="APIConstants.cs" />
     <Compile Include="Model\Champion.cs" />
