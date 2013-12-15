@@ -7,13 +7,17 @@ using HechTex.RiotGamesAPIWrapper.APIConstants;
 
 namespace HechTex.RiotGamesAPIWrapper.Cache.AbstractCacheMethod
 {
-    internal class AbstractDefaultCache<T> : AbstractCache<T>
+    /// <summary>
+    /// Implementation of DefaultCache.<para/>
+    /// Simple implementation by storing the
+    /// requested data once and for this session.
+    /// </summary>
+    internal class DefaultCache<T> : AbstractCache<T>
     {
         private T _content;
 
-        internal AbstractDefaultCache(APICaller apiCaller, Regions region,
-            string methodName, params string[] parameters)
-            : base(apiCaller, region, methodName, parameters)
+        internal DefaultCache(Func<T> function)
+            : base(function)
         {
             CacheMethod = CacheMethod.Default;
         }
@@ -21,7 +25,7 @@ namespace HechTex.RiotGamesAPIWrapper.Cache.AbstractCacheMethod
         internal override T GetValue()
         {
             if (_content == null)
-                _content = CallMethod();
+                _content = Function();
             return _content;
         }
     }

@@ -7,18 +7,22 @@ using HechTex.RiotGamesAPIWrapper.APIConstants;
 
 namespace HechTex.RiotGamesAPIWrapper.Cache.AbstractCacheMethod
 {
-    internal class AbstractNoCache<T> : AbstractCache<T>
+    /// <summary>
+    /// Implementation of NoCache.<para/>
+    /// Every call requests the data again from
+    /// remote. No storage at all.
+    /// </summary>
+    internal class NoCache<T> : AbstractCache<T>
     {
-        internal AbstractNoCache(APICaller apiCaller, Regions region,
-            string methodName, params string[] parameters)
-            : base(apiCaller, region, methodName, parameters)
+        internal NoCache(Func<T> function)
+            : base(function)
         {
             CacheMethod = CacheMethod.NoCache;
         }
 
         internal override T GetValue()
         {
-            return CallMethod();
+            return Function();
         }
     }
 }

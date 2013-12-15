@@ -27,6 +27,32 @@ namespace HechTex.RiotGamesAPIWrapper
         }
 
         /// <summary>
+        /// Returns the list of all champions.
+        /// </summary>
+        /// <param name="region">Region to search in.</param>
+        /// <returns>List of Champions.</returns>
+        internal IList<Champion> GetChampions(Regions region)
+        {
+            var urlsegs = new Dictionary<string, string> { { "region", GetRegionString(region) } }; // dat syntax
+            return CallAPI<List<Champion>>(API_URL_CHAMPION, urlsegs, "champions");
+        }
+
+        /// <summary>
+        /// Returns the list of runepages of a summoner.
+        /// </summary>
+        /// <param name="region">Region to search in.</param>
+        /// <param name="summonerId">The summoner's id.</param>
+        /// <returns>List of RunePages.</returns>
+        internal IList<RunePage> GetRunePages(Regions region, long summonerId)
+        {
+            var urlsegs = new Dictionary<string, string> {
+                { "region", GetRegionString(region) }, { "summonerId", summonerId.ToString() } };
+            return CallAPI<List<RunePage>>(API_URL_RUNEPAGES, urlsegs, "pages");
+        }
+
+        #region Helpmethods
+
+        /// <summary>
         /// Calls the API with a given sub URL
         /// </summary>
         /// <typeparam name="T">Return type of the API method to call. The resulting JSON gets parsed to the given type</typeparam>
@@ -48,32 +74,6 @@ namespace HechTex.RiotGamesAPIWrapper
             return _client.Execute<T>(request).Data;
         }
 
-        /// <summary>
-        /// Returns the list of all champions.
-        /// </summary>
-        /// <param name="region">Region to search in.</param>
-        /// <returns>List of Champions.</returns>
-        internal IList<Champion> GetChampions(Regions region)
-        {
-            var urlsegs = new Dictionary<string, string> { { "region", GetRegionString(region) } }; // dat syntax
-            return CallAPI<List<Champion>>(API_URL_CHAMPION, urlsegs, "champions");
-        }
-
-        /// <summary>
-        /// Returns the list of runepages of a summoner.
-        /// </summary>
-        /// <param name="region">Region to search in.</param>
-        /// <param name="summonerId">The summoner's id.</param>
-        /// <returns>List of RunePages.</returns>
-        internal IList<RunePage> GetRunePages(Regions region, long summonerId)
-        {
-            var urlsegs = new Dictionary<string, string> {
-                { "region", GetRegionString(region) }, { "summonerId", summonerId.ToString() } };
-            // with this, no RunePages-class is needed.
-            return CallAPI<List<RunePage>>(API_URL_RUNEPAGES, urlsegs, "pages");
-        }
-
-        #region Helpmethods
 
         private string GetRegionString(Regions region)
         {

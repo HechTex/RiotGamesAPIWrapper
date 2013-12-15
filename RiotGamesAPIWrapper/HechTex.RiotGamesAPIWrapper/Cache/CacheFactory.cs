@@ -2,28 +2,12 @@
 using System.Collections.Generic;
 using CsExtensions;
 using HechTex.RiotGamesAPIWrapper.APIConstants;
-using HechTex.RiotGamesAPIWrapper.Cache.ChampionCache;
-using HechTex.RiotGamesAPIWrapper.Cache.RunePageCache;
+using HechTex.RiotGamesAPIWrapper.Cache.AbstractCacheMethod;
 using HechTex.RiotGamesAPIWrapper.Model;
 using HechTex.RiotGamesAPIWrapper.Model.Runes;
 
 namespace HechTex.RiotGamesAPIWrapper.Cache
 {
-    internal enum CacheMethod
-    {
-        /// <summary>
-        /// Default cache-method, storing the result once
-        /// and using this one.
-        /// </summary>
-        Default,
-
-        /// <summary>
-        /// No cache-method at all. Results are no stored
-        /// and requested ever again.
-        /// </summary>
-        NoCache
-    }
-
     internal class CacheFactory
     {
         private const string CACHEMETHOD_NOTSUPORTED =
@@ -36,20 +20,15 @@ namespace HechTex.RiotGamesAPIWrapper.Cache
 
         internal CacheFactory(string key)
         {
-            initializeDictionaries();
+            InitializeDictionaries();
             _apiCaller = new APICaller(key);
         }
 
-        private void initializeDictionaries()
+        private void InitializeDictionaries()
         {
             _championCaches = new Dictionary<CacheMethod, AbstractCache<IList<Champion>>>();
             _runePageCaches = new Dictionary<CacheMethod, AbstractCache<IList<RunePage>>>();
         }
-
-        /* TODO | dj | \
-         * an automatism for those cache-creations
-         * would be very nice. :)
-         */
 
         /// <summary>
         /// Returns the result of APICaller.GetChampions,
@@ -64,28 +43,8 @@ namespace HechTex.RiotGamesAPIWrapper.Cache
         internal IList<Champion> GetChampions(Regions region,
             CacheMethod cacheMethod = CacheMethod.Default)
         {
-            AbstractCache<IList<Champion>> acc;
-
-            if (_championCaches.ContainsKey(cacheMethod))
-                acc = _championCaches[cacheMethod];
-            else
-            {
-                switch (cacheMethod)
-                {
-                    case CacheMethod.Default:
-                        acc = new DefaultChampionCache(_apiCaller, region);
-                        break;
-                    case CacheMethod.NoCache:
-                        acc = new NoChampionCache(_apiCaller, region);
-                        break;
-                    default:
-                        throw new NotSupportedException(
-                            CACHEMETHOD_NOTSUPORTED.Format(cacheMethod));
-                }
-                _championCaches.Add(cacheMethod, acc);
-            }
-
-            return acc.GetValue();
+            return CallCache<IList<Champion>>(_championCaches,
+                () => _apiCaller.GetChampions(region), cacheMethod);
         }
 
         /// <summary>
@@ -102,27 +61,50 @@ namespace HechTex.RiotGamesAPIWrapper.Cache
         internal IList<RunePage> GetRunePages(Regions region, long summonerId,
             CacheMethod cacheMethod = CacheMethod.Default)
         {
-            AbstractCache<IList<RunePage>> acc;
+            return CallCache<IList<RunePage>>(_runePageCaches,
+                () => _apiCaller.GetRunePages(region, summonerId), cacheMethod);
+        }
 
-            if (_runePageCaches.ContainsKey(cacheMethod))
-                acc = _runePageCaches[cacheMethod];
+        #region Helpmethods
+
+        /// <summary>
+        /// One method to rule 'em all!
+        /// </summary>
+        /// <typeparam name="T">Desired returnvalue.</typeparam>
+        /// <param name="cacheDict">The dictionary of caches to look
+        /// and/or store in.</param>
+        /// <param name="func">The function to be called
+        /// (e.g. () => _apiCaller.GetChampions(region)).</param>
+        /// <param name="cacheMethod">The CacheMethod to use.</param>
+        /// <returns>The result of func from the corresponding cache.</returns>
+        private T CallCache<T>(Dictionary<CacheMethod, AbstractCache<T>> cacheDict,
+             Func<T> func, CacheMethod cacheMethod = CacheMethod.Default)
+        {
+            AbstractCache<T> ac;
+
+            if (cacheDict.ContainsKey(cacheMethod))
+                ac = cacheDict[cacheMethod];
             else
             {
                 switch (cacheMethod)
                 {
+                    // TODO more cache-implementations are going here!
                     case CacheMethod.Default:
-                        acc = new DefaultRunePageCache(_apiCaller, region, summonerId);
+                        ac = new DefaultCache<T>(func);
                         break;
                     case CacheMethod.NoCache:
-                        acc = new NoRunePageCache(_apiCaller, region, summonerId);
+                        ac = new NoCache<T>(func);
                         break;
                     default:
                         throw new NotSupportedException(
                             CACHEMETHOD_NOTSUPORTED.Format(cacheMethod));
                 }
+                cacheDict.Add(cacheMethod, ac);
             }
 
-            return acc.GetValue();
+            return ac.GetValue();
         }
+
+        #endregion
     }
 }
