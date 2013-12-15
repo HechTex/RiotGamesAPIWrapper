@@ -46,6 +46,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="APICaller.cs" />
+    <Compile Include="Cache\AbstractCacheMethod\AbstractDefaultCache.cs" />
+    <Compile Include="Cache\AbstractCacheMethod\AbstractNoCache.cs" />
     <Compile Include="Cache\CacheFactory.cs" />
     <Compile Include="Cache\ChampionCache\DefaultChampionCache.cs" />
     <Compile Include="Cache\AbstractCache.cs" />

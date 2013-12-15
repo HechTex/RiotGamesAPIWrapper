@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using HechTex.RiotGamesAPIWrapper.APIConstants;
+using HechTex.RiotGamesAPIWrapper.Cache.AbstractCacheMethod;
 using HechTex.RiotGamesAPIWrapper.Model.Runes;
 
 namespace HechTex.RiotGamesAPIWrapper.Cache.RunePageCache
@@ -11,7 +12,7 @@ namespace HechTex.RiotGamesAPIWrapper.Cache.RunePageCache
     /// <summary>
     /// NoCache-method for RunePageCache
     /// </summary>
-    internal class NoRunePageCache : AbstractCache<IList<RunePage>>
+    internal class NoRunePageCache : AbstractNoCache<IList<RunePage>>
     {
         /// <summary>
         /// Constructor for the NoRunePageCache.
@@ -21,14 +22,14 @@ namespace HechTex.RiotGamesAPIWrapper.Cache.RunePageCache
         /// <param name="region">The region.</param>
         /// <param name="summonerId">The summoner's id.</param>
         internal NoRunePageCache(APICaller apiCaller, Regions region, long summonerId)
-            : base(apiCaller, region, summonerId.ToString())
+            : base(apiCaller, region, "GetRunePages", summonerId.ToString())
         {
-            CacheMethod = CacheMethod.NoCache;
+            //CacheMethod = CacheMethod.NoCache;
         }
 
-        internal override IList<RunePage> GetValue()
-        {
-            return ApiCaller.GetRunePages(Region, int.Parse(Parameters[0]));
-        }
+        //internal override IList<RunePage> GetValue()
+        //{
+        //    return ApiCaller.GetRunePages(Region, long.Parse(Parameters[0]));
+        //}
     }
 }

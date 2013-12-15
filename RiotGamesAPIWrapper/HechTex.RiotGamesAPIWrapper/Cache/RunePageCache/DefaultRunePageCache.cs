@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using HechTex.RiotGamesAPIWrapper.APIConstants;
+using HechTex.RiotGamesAPIWrapper.Cache.AbstractCacheMethod;
 using HechTex.RiotGamesAPIWrapper.Model.Runes;
 
 namespace HechTex.RiotGamesAPIWrapper.Cache.RunePageCache
@@ -11,7 +12,7 @@ namespace HechTex.RiotGamesAPIWrapper.Cache.RunePageCache
     /// <summary>
     /// Default cache-method for the RunePageCache.
     /// </summary>
-    internal class DefaultRunePageCache : AbstractCache<IList<RunePage>>
+    internal class DefaultRunePageCache : AbstractDefaultCache<IList<RunePage>>
     {
         private IList<RunePage> _list;
 
@@ -23,16 +24,16 @@ namespace HechTex.RiotGamesAPIWrapper.Cache.RunePageCache
         /// <param name="region">The region.</param>
         /// <param name="summonerId">The summoner's id.</param>
         internal DefaultRunePageCache(APICaller apiCaller, Regions region, long summonerId)
-            : base(apiCaller, region, summonerId.ToString())
+            : base(apiCaller, region, "GetRunePages", summonerId.ToString())
         {
-            CacheMethod = CacheMethod.Default;
+            //CacheMethod = CacheMethod.Default;
         }
 
-        internal override IList<RunePage> GetValue()
-        {
-            if (_list == null || _list.Count == 0)
-                _list = ApiCaller.GetRunePages(Region, int.Parse(Parameters[0]));
-            return _list;
-        }
+        //internal override IList<RunePage> GetValue()
+        //{
+        //    if (_list == null || _list.Count == 0)
+        //        _list = ApiCaller.GetRunePages(Region, long.Parse(Parameters[0]));
+        //    return _list;
+        //}
     }
 }
