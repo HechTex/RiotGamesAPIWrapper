@@ -91,7 +91,7 @@ namespace HechTex.RiotGamesAPIWrapper
         /// <param name="region">Region to search in.</param>
         /// <param name="summonerId">The summoner's id.</param>
         /// <returns>List of RunePages.</returns>
-        public IList<RunePage> GetRunePages(Regions region, int summonerId)
+        public IList<RunePage> GetRunePages(Regions region, long summonerId)
         {
             var urlsegs = new Dictionary<string, string> {
                 { "region", GetRegionString(region) }, { "summonerId", summonerId.ToString() } };
