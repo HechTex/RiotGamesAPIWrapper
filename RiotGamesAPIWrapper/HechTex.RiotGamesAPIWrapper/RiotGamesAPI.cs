@@ -42,6 +42,8 @@ namespace HechTex.RiotGamesAPIWrapper
                 apiKey = System.IO.Path.GetFullPath(DEFAULT_APIPATH);
             string key = KeyLoaderFactory.GetKey(apiKey); // TODO | dj | throws exceptions. (to be written in summary)
             _cacheFactory = new CacheFactory(key);
+            
+            // TODO | dj | somewhere the CacheMethod has be chosen...
         }
 
         /// <summary>

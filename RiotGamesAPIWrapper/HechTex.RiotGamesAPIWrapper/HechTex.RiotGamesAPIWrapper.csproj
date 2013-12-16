@@ -48,6 +48,7 @@
     <Compile Include="APICaller.cs" />
     <Compile Include="Cache\AbstractCacheMethod\DefaultCache.cs" />
     <Compile Include="Cache\AbstractCacheMethod\NoCache.cs" />
+    <Compile Include="Cache\AbstractCacheMethod\TimedCache.cs" />
     <Compile Include="Cache\CacheFactory.cs" />
     <Compile Include="Cache\AbstractCache.cs" />
     <Compile Include="Cache\CacheMethod.cs" />

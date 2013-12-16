@@ -35,11 +35,7 @@ namespace HechTex.RiotGamesAPIWrapper.Cache
         /// filtered/provided by the chosen cache.
         /// </summary>
         /// <param name="region">The region.</param>
-        /// <param name="cacheMethod">The CacheMethod.<para/>
-        /// Not every Method might be implemented for this kind of
-        /// request. Please keep this in mind.</param>
-        /// <returns>List of all champions.</returns>
-        // TODO | dj | Not implemented cache-methods shouldn't exist!
+        /// <param name="cacheMethod">The CacheMethod.</returns>
         internal IList<Champion> GetChampions(Regions region,
             CacheMethod cacheMethod = CacheMethod.Default)
         {
@@ -53,11 +49,7 @@ namespace HechTex.RiotGamesAPIWrapper.Cache
         /// </summary>
         /// <param name="region">The region.</param>
         /// <param name="summonerId">The summoner's id.</param>
-        /// <param name="cacheMethod">The CacheMethod.<para/>
-        /// Not every Method might be implemented for this kind of
-        /// request. Please keep this in mind.</param>
-        /// <returns>List of all champions.</returns>
-        // TODO | dj | Not implemented cache-methods shouldn't exist!
+        /// <param name="cacheMethod">The CacheMethod..</returns>
         internal IList<RunePage> GetRunePages(Regions region, long summonerId,
             CacheMethod cacheMethod = CacheMethod.Default)
         {
@@ -94,6 +86,9 @@ namespace HechTex.RiotGamesAPIWrapper.Cache
                         break;
                     case CacheMethod.NoCache:
                         ac = new NoCache<T>(func);
+                        break;
+                    case CacheMethod.TimedCache:
+                        ac = new TimedCache<T>(func);
                         break;
                     default:
                         throw new NotSupportedException(

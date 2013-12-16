@@ -11,7 +11,6 @@ namespace HechTex.RiotGamesAPIWrapper.KeyLoader
     /// </summary>
     internal class KeyLoaderFactory
     {
-        // TODO VERIFY!
         private readonly static Regex API_PATTERN = new Regex(@"[\da-z]{8}(?:-[\da-z]{4}){3}-[\da-z]{12}",
                                                             RegexOptions.Compiled);
 

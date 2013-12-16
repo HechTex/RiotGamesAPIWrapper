@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
+﻿
 namespace HechTex.RiotGamesAPIWrapper.Cache
 {
     internal enum CacheMethod
@@ -18,7 +13,18 @@ namespace HechTex.RiotGamesAPIWrapper.Cache
         /// No cache-method at all. Results are not stored
         /// and requested always again.
         /// </summary>
-        NoCache
+        NoCache,
+
+        /// <summary>
+        /// Timed cache-method, only updating data after a
+        /// timespan from last the request.
+        /// </summary>
+        TimedCache
+
+        /* ===== IMPORTANT ============================= *
+         * Any new CacheMethod has to be implemented and *
+         * added to the CacheFactory.CallCache-method!   *
+         * ============================================= */
     }
 
 }
