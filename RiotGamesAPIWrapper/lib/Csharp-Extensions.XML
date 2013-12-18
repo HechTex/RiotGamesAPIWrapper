@@ -99,6 +99,15 @@
             <param name="objs">Values to appear in string.</param>
             <returns>Formatted string.</returns>
         </member>
+        <member name="M:CsExtensions.StringExtensions.Join``1(System.String,System.Collections.Generic.IEnumerable{``0})">
+            <summary>
+            Short form of String.Join(...).
+            </summary>
+            <typeparam name="T">The type of the enummerables.</typeparam>
+            <param name="conc">Concatenation-string, combining the elements.</param>
+            <param name="enumerable">The elements to be joined.</param>
+            <returns>A string with all elements in enumerable concatenated with conc.</returns>
+        </member>
         <member name="M:CsExtensions.StringExtensions.ParseToEnum``1(System.String)">
             <summary>
             Parses the given string to the

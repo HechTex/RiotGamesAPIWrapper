@@ -1,20 +1,17 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using CsExtensions.Console;
 using CsExtensions;
+using CsExtensions.Console;
 using HechTex.RiotGamesAPIWrapper;
 using HechTex.RiotGamesAPIWrapper.APIConstants;
-using HechTex.RiotGamesAPIWrapper.KeyLoader;
-using HechTex.RiotGamesAPIWrapper.Model;
 using HechTex.RiotGamesAPIWrapper.Cache;
+using HechTex.RiotGamesAPIWrapper.KeyLoader;
 
 namespace HechTex.Test
 {
     class Program
     {
         private const long SUMMONERID = 26231463;
+        private const long SUMMONERID2 = 20051790;
 
         static void Main(string[] args)
         {
@@ -55,6 +52,17 @@ namespace HechTex.Test
                 Console.WriteLine(page.GetInfoString());
         }
 
+        [DynamicTestConsole.Comment("Test to get summoner-names from ids.")]
+        public static void TestGetSummonerNames()
+        {
+            RiotGamesAPI api = new RiotGamesAPI(null);
+            var result = api.GetSummonerNames(Regions.EUW,
+                new long[] { SUMMONERID, SUMMONERID2 });
+            Console.WriteLine("Summonernames:");
+            foreach (var name in result)
+                Console.WriteLine(name.GetInfoString());
+        }
+
         [DynamicTestConsole.Comment("Testing the TimedCache. CONSUMES: time, response")]
         public static void TestTimedCache()
         {
@@ -63,7 +71,8 @@ namespace HechTex.Test
                 System.IO.Path.GetFullPath(@"..\..\..\..\api.key")));
             Console.WriteLine("You might want to use breakpoints for verification.");
 
-            Console.WriteLine("Got {0} champions.".Format(
+            // TODO | dj | use PerformanceCounter to observe network.
+            Console.WriteLine("Got {0} champions with a total {1} Bytes received.".Format(
                 cf.GetChampions(Regions.EUW, cm).Count));
             System.Threading.Thread.Sleep(new TimeSpan(0, 0, 50));
             Console.WriteLine("Got {0} champions after 50 seconds".Format(

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using CsExtensions;
 using HechTex.RiotGamesAPIWrapper.APIConstants;
 using HechTex.RiotGamesAPIWrapper.Model;
 using HechTex.RiotGamesAPIWrapper.Model.Runes;
@@ -12,6 +13,7 @@ namespace HechTex.RiotGamesAPIWrapper
         private const string API_BASE_URL = @"https://prod.api.pvp.net/";
         private const string API_URL_CHAMPION = @"api/lol/{region}/v1.1/champion";
         private const string API_URL_RUNEPAGES = @"api/lol/{region}/v1.1/summoner/{summonerId}/runes";
+        private const string API_URL_SUMMONERNAMES = @"api/lol/{region}/v1.1/summoner/{summonerIds}/name";
 
         private RestClient _client;
 
@@ -45,6 +47,20 @@ namespace HechTex.RiotGamesAPIWrapper
             var urlsegs = new Dictionary<string, string> {
                 { "region", GetRegionString(region) }, { "summonerId", summonerId.ToString() } };
             return CallAPI<List<RunePage>>(API_URL_RUNEPAGES, urlsegs, "pages");
+        }
+
+        /// <summary>
+        /// Returns a list of the summonernames to the
+        /// given ids.
+        /// </summary>
+        /// <param name="region">Region to search in.</param>
+        /// <param name="summonerIds">The summoner's ids.</param>
+        /// <returns>List of SummonerNames.</returns>
+        internal IList<SummonerName> GetSummonerNames(Regions region, IEnumerable<long> summonerIds)
+        {
+            var urlsegs = new Dictionary<string, string> {
+                { "region", GetRegionString(region) }, { "summonerIds", ",".Join(summonerIds) } };
+            return CallAPI<List<SummonerName>>(API_URL_SUMMONERNAMES, urlsegs, "summoners");
         }
 
         #region Helpmethods

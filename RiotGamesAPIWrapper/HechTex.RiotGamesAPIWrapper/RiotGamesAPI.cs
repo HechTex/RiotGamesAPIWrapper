@@ -22,6 +22,12 @@ namespace HechTex.RiotGamesAPIWrapper
 
         private CacheFactory _cacheFactory;
 
+        /// <summary>
+        /// Settings to be used for the requests.
+        /// </summary>
+        public CacheSettings CacheSettings { get; private set; }
+        // TODO | dj | keep setter private or allow public change?
+
         // constructor is private to prevent misuse
         private RiotGamesAPI()
         { }
@@ -42,8 +48,7 @@ namespace HechTex.RiotGamesAPIWrapper
                 apiKey = System.IO.Path.GetFullPath(DEFAULT_APIPATH);
             string key = KeyLoaderFactory.GetKey(apiKey); // TODO | dj | throws exceptions. (to be written in summary)
             _cacheFactory = new CacheFactory(key);
-            
-            // TODO | dj | somewhere the CacheMethod has be chosen...
+            CacheSettings = new CacheSettings();
         }
 
         /// <summary>
@@ -55,7 +60,8 @@ namespace HechTex.RiotGamesAPIWrapper
         /// Returns null, if no items/no connection.</returns>
         public IList<Champion> GetChampions(Regions region)
         {
-            return _cacheFactory.GetChampions(region);
+            return _cacheFactory.GetChampions(region,
+                CacheSettings.GetChampions);
         }
 
         // TODO | dj | I want a method to get the Champion by ~name or at least id!
@@ -72,7 +78,24 @@ namespace HechTex.RiotGamesAPIWrapper
         /// Returns null, if no items/no connection.</returns>
         public IList<RunePage> GetRunePages(Regions region, long summonerId)
         {
-            return _cacheFactory.GetRunePages(region, summonerId);
+            return _cacheFactory.GetRunePages(region, summonerId,
+                CacheSettings.GetRunePages);
+        }
+
+        /// <summary>
+        /// Returns the summoner-names to the given ids.
+        /// Depending on cache-mode, this might take a moment.
+        /// </summary>
+        /// <param name="region">Region to search in.</param>
+        /// <param name="summonerIds">The summoner's ids for whom
+        /// the names will be fetched.</param>
+        /// <returns>List of SummonerNames.<para/>
+        /// Returns null, if no items/no connection.</returns>
+        public IList<SummonerName> GetSummonerNames(Regions region,
+            IEnumerable<long> summonerIds)
+        {
+            return _cacheFactory.GetSummonerNames(region, summonerIds,
+                CacheSettings.GetSummonerNames);
         }
     }
 }

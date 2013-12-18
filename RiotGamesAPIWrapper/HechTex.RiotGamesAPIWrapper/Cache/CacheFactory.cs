@@ -17,6 +17,7 @@ namespace HechTex.RiotGamesAPIWrapper.Cache
 
         private Dictionary<CacheMethod, AbstractCache<IList<Champion>>> _championCaches;
         private Dictionary<CacheMethod, AbstractCache<IList<RunePage>>> _runePageCaches;
+        private Dictionary<CacheMethod, AbstractCache<IList<SummonerName>>> _summonerNamesCaches;
 
         internal CacheFactory(string key)
         {
@@ -28,6 +29,7 @@ namespace HechTex.RiotGamesAPIWrapper.Cache
         {
             _championCaches = new Dictionary<CacheMethod, AbstractCache<IList<Champion>>>();
             _runePageCaches = new Dictionary<CacheMethod, AbstractCache<IList<RunePage>>>();
+            _summonerNamesCaches = new Dictionary<CacheMethod,AbstractCache<IList<SummonerName>>>();
         }
 
         /// <summary>
@@ -49,12 +51,27 @@ namespace HechTex.RiotGamesAPIWrapper.Cache
         /// </summary>
         /// <param name="region">The region.</param>
         /// <param name="summonerId">The summoner's id.</param>
-        /// <param name="cacheMethod">The CacheMethod..</returns>
+        /// <param name="cacheMethod">The CacheMethod.</returns>
         internal IList<RunePage> GetRunePages(Regions region, long summonerId,
             CacheMethod cacheMethod = CacheMethod.Default)
         {
+            // TODO | dj | if other parameters, always the same cache is chosen...
             return CallCache<IList<RunePage>>(_runePageCaches,
                 () => _apiCaller.GetRunePages(region, summonerId), cacheMethod);
+        }
+
+        /// <summary>
+        /// Returns the result of APICaller.GetSummonerNames,
+        /// filtered/provided by the chosen cache.
+        /// </summary>
+        /// <param name="region">The region.</param>
+        /// <param name="summonerIds">The summoner's ids.</param>
+        /// <param name="cacheMethod">The CacheMethod.</param>
+        internal IList<SummonerName> GetSummonerNames(Regions region,
+            IEnumerable<long> summonerIds, CacheMethod cacheMethod = CacheMethod.Default)
+        {
+            return CallCache<IList<SummonerName>>(_summonerNamesCaches,
+                () => _apiCaller.GetSummonerNames(region, summonerIds), cacheMethod);
         }
 
         #region Helpmethods

@@ -1,7 +1,7 @@
 ﻿
 namespace HechTex.RiotGamesAPIWrapper.Cache
 {
-    internal enum CacheMethod
+    public enum CacheMethod
     {
         /// <summary>
         /// Default cache-method, storing the result once
