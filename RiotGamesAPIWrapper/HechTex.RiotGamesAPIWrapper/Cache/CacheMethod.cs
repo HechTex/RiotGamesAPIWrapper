@@ -4,16 +4,16 @@ namespace HechTex.RiotGamesAPIWrapper.Cache
     public enum CacheMethod
     {
         /// <summary>
-        /// Default cache-method, storing the result once
-        /// and using this one.
-        /// </summary>
-        Default,
-
-        /// <summary>
         /// No cache-method at all. Results are not stored
         /// and requested always again.
         /// </summary>
         NoCache,
+        
+        /// <summary>
+        /// Default cache-method, storing the result once
+        /// and using this one.
+        /// </summary>
+        Default,
 
         /// <summary>
         /// Timed cache-method, only updating data after a

@@ -20,7 +20,7 @@ namespace HechTex.RiotGamesAPIWrapper
     {
         private const string DEFAULT_APIPATH = @"..\..\..\..\api.key";
 
-        private CacheFactory _cacheFactory;
+        private AbstractCacheFactory _cacheFactory;
 
         /// <summary>
         /// Settings to be used for the requests.
@@ -47,8 +47,11 @@ namespace HechTex.RiotGamesAPIWrapper
             if (String.IsNullOrEmpty(apiKey))
                 apiKey = System.IO.Path.GetFullPath(DEFAULT_APIPATH);
             string key = KeyLoaderFactory.GetKey(apiKey); // TODO | dj | throws exceptions. (to be written in summary)
-            _cacheFactory = new CacheFactory(key);
-            CacheSettings = new CacheSettings();
+
+            CacheSettings = new CacheSettings();    // dj | if not using a reference, the updating would be to long-winded.
+            
+            // TODO | dj | Maybe here it could be possible to select the factory?
+            _cacheFactory = new FakeCacheFactory(key, CacheSettings);
         }
 
         /// <summary>
@@ -60,8 +63,7 @@ namespace HechTex.RiotGamesAPIWrapper
         /// Returns null, if no items/no connection.</returns>
         public IList<Champion> GetChampions(Regions region)
         {
-            return _cacheFactory.GetChampions(region,
-                CacheSettings.GetChampions);
+            return _cacheFactory.GetChampions(region);
         }
 
         // TODO | dj | I want a method to get the Champion by ~name or at least id!
@@ -78,8 +80,7 @@ namespace HechTex.RiotGamesAPIWrapper
         /// Returns null, if no items/no connection.</returns>
         public IList<RunePage> GetRunePages(Regions region, long summonerId)
         {
-            return _cacheFactory.GetRunePages(region, summonerId,
-                CacheSettings.GetRunePages);
+            return _cacheFactory.GetRunePages(region, summonerId);
         }
 
         /// <summary>
@@ -94,8 +95,7 @@ namespace HechTex.RiotGamesAPIWrapper
         public IList<SummonerName> GetSummonerNames(Regions region,
             IEnumerable<long> summonerIds)
         {
-            return _cacheFactory.GetSummonerNames(region, summonerIds,
-                CacheSettings.GetSummonerNames);
+            return _cacheFactory.GetSummonerNames(region, summonerIds);
         }
     }
 }

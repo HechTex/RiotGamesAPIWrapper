@@ -66,20 +66,26 @@ namespace HechTex.Test
         [DynamicTestConsole.Comment("Testing the TimedCache. CONSUMES: time, response")]
         public static void TestTimedCache()
         {
-            CacheMethod cm = CacheMethod.TimedCache;
-            CacheFactory cf = new CacheFactory(KeyLoaderFactory.GetKey(
-                System.IO.Path.GetFullPath(@"..\..\..\..\api.key")));
+            CacheSettings cs = new CacheSettings()
+            {
+                GetChampions = CacheMethod.TimedCache,
+                GetRunePages = CacheMethod.TimedCache,
+                GetSummonerNames = CacheMethod.TimedCache
+            };
+
+            MultipleCacheFactory cf = new MultipleCacheFactory(KeyLoaderFactory.GetKey(
+                System.IO.Path.GetFullPath(@"..\..\..\..\api.key")), cs);
             Console.WriteLine("You might want to use breakpoints for verification.");
 
             // TODO | dj | use PerformanceCounter to observe network.
             Console.WriteLine("Got {0} champions with a total {1} Bytes received.".Format(
-                cf.GetChampions(Regions.EUW, cm).Count));
+                cf.GetChampions(Regions.EUW).Count));
             System.Threading.Thread.Sleep(new TimeSpan(0, 0, 50));
             Console.WriteLine("Got {0} champions after 50 seconds".Format(
-                cf.GetChampions(Regions.EUW, cm).Count));
+                cf.GetChampions(Regions.EUW).Count));
             System.Threading.Thread.Sleep(new TimeSpan(0, 0, 50));
             Console.WriteLine("Got {0} champions after +50 seconds".Format(
-                cf.GetChampions(Regions.EUW, cm).Count));
+                cf.GetChampions(Regions.EUW).Count));
 
         }
     }

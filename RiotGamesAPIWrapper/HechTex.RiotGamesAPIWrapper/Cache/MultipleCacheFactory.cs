@@ -8,21 +8,24 @@ using HechTex.RiotGamesAPIWrapper.Model.Runes;
 
 namespace HechTex.RiotGamesAPIWrapper.Cache
 {
-    internal class CacheFactory
+    /// <summary>
+    /// A cache-factory, trying to provide different cache-methods.
+    /// Unfortunately it works only with NoCache. The other CacheMethods
+    /// are properly working only for the exact same parameters.
+    /// </summary>
+    internal class MultipleCacheFactory : AbstractCacheFactory
     {
-        private const string CACHEMETHOD_NOTSUPORTED =
+        private const string CACHEMETHOD_NOTSUPPORTED =
             "The requested cache-method '{0}' is not supported for this request.";
-
-        private APICaller _apiCaller;
 
         private Dictionary<CacheMethod, AbstractCache<IList<Champion>>> _championCaches;
         private Dictionary<CacheMethod, AbstractCache<IList<RunePage>>> _runePageCaches;
         private Dictionary<CacheMethod, AbstractCache<IList<SummonerName>>> _summonerNamesCaches;
 
-        internal CacheFactory(string key)
+        internal MultipleCacheFactory(string key, CacheSettings settings)
+            : base(key, settings)
         {
             InitializeDictionaries();
-            _apiCaller = new APICaller(key);
         }
 
         private void InitializeDictionaries()
@@ -32,46 +35,28 @@ namespace HechTex.RiotGamesAPIWrapper.Cache
             _summonerNamesCaches = new Dictionary<CacheMethod,AbstractCache<IList<SummonerName>>>();
         }
 
-        /// <summary>
-        /// Returns the result of APICaller.GetChampions,
-        /// filtered/provided by the chosen cache.
-        /// </summary>
-        /// <param name="region">The region.</param>
-        /// <param name="cacheMethod">The CacheMethod.</returns>
-        internal IList<Champion> GetChampions(Regions region,
-            CacheMethod cacheMethod = CacheMethod.Default)
+        /// <inheritdoc />
+        internal override IList<Champion> GetChampions(Regions region)
         {
             return CallCache<IList<Champion>>(_championCaches,
-                () => _apiCaller.GetChampions(region), cacheMethod);
+                () => ApiCaller.GetChampions(region), Settings.GetChampions);
         }
 
-        /// <summary>
-        /// Returns the result of APICaller.GetRunePages,
-        /// filtered/provided by the chosen cache.
-        /// </summary>
-        /// <param name="region">The region.</param>
-        /// <param name="summonerId">The summoner's id.</param>
-        /// <param name="cacheMethod">The CacheMethod.</returns>
-        internal IList<RunePage> GetRunePages(Regions region, long summonerId,
-            CacheMethod cacheMethod = CacheMethod.Default)
+        /// <inheritdoc />
+        internal override IList<RunePage> GetRunePages(Regions region, long summonerId)
         {
-            // TODO | dj | if other parameters, always the same cache is chosen...
             return CallCache<IList<RunePage>>(_runePageCaches,
-                () => _apiCaller.GetRunePages(region, summonerId), cacheMethod);
+                () => ApiCaller.GetRunePages(region, summonerId),
+                Settings.GetRunePages);
         }
 
-        /// <summary>
-        /// Returns the result of APICaller.GetSummonerNames,
-        /// filtered/provided by the chosen cache.
-        /// </summary>
-        /// <param name="region">The region.</param>
-        /// <param name="summonerIds">The summoner's ids.</param>
-        /// <param name="cacheMethod">The CacheMethod.</param>
-        internal IList<SummonerName> GetSummonerNames(Regions region,
-            IEnumerable<long> summonerIds, CacheMethod cacheMethod = CacheMethod.Default)
+        /// <inheritdoc />
+        internal override IList<SummonerName> GetSummonerNames(Regions region,
+            IEnumerable<long> summonerIds)
         {
             return CallCache<IList<SummonerName>>(_summonerNamesCaches,
-                () => _apiCaller.GetSummonerNames(region, summonerIds), cacheMethod);
+                () => ApiCaller.GetSummonerNames(region, summonerIds),
+                Settings.GetSummonerNames);
         }
 
         #region Helpmethods
@@ -109,7 +94,7 @@ namespace HechTex.RiotGamesAPIWrapper.Cache
                         break;
                     default:
                         throw new NotSupportedException(
-                            CACHEMETHOD_NOTSUPORTED.Format(cacheMethod));
+                            CACHEMETHOD_NOTSUPPORTED.Format(cacheMethod));
                 }
                 cacheDict.Add(cacheMethod, ac);
             }

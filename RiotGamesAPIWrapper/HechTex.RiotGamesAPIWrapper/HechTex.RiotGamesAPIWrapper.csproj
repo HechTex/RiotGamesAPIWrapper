@@ -46,13 +46,15 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="APICaller.cs" />
+    <Compile Include="Cache\AbstractCacheFactory.cs" />
     <Compile Include="Cache\AbstractCacheMethod\DefaultCache.cs" />
     <Compile Include="Cache\AbstractCacheMethod\NoCache.cs" />
     <Compile Include="Cache\AbstractCacheMethod\TimedCache.cs" />
-    <Compile Include="Cache\CacheFactory.cs" />
+    <Compile Include="Cache\MultipleCacheFactory.cs" />
     <Compile Include="Cache\AbstractCache.cs" />
     <Compile Include="Cache\CacheMethod.cs" />
     <Compile Include="Cache\CacheSettings.cs" />
+    <Compile Include="Cache\FakeCacheFactory.cs" />
     <Compile Include="KeyLoader\KeyLoaderFactory.cs" />
     <Compile Include="APIConstants.cs" />
     <Compile Include="Model\Champion.cs" />
