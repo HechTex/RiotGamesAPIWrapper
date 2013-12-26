@@ -31,12 +31,6 @@ namespace HechTex.RiotGamesAPIWrapper.Model
         public long RevisionDate { get; set; }  // TODO | dj | is it possible for JSON to use DateTime?
 
         /// <summary>
-        /// Human readable string representing date
-        /// summoner was last modified.
-        /// </summary>
-        public DateTime RevisionDateStr { get; set; } // TODO | dj | is JSON.Date equals C#.DateTime??
-
-        /// <summary>
         /// Summoner level associated with the summoner.
         /// </summary>
         public long SummonerLevel { get; set; } // TODO | dj | long?

@@ -12,8 +12,8 @@ namespace HechTex.RiotGamesAPIWrapper
     {
         private const string API_BASE_URL = @"https://prod.api.pvp.net/";
         private const string API_URL_CHAMPION = @"api/lol/{region}/v1.1/champion";
-        private const string API_URL_RUNEPAGES = @"api/lol/{region}/v1.1/summoner/{summonerId}/runes";
-        private const string API_URL_SUMMONERNAMES = @"api/lol/{region}/v1.1/summoner/{summonerIds}/name";
+        private const string API_URL_RUNEPAGES = @"api/lol/{region}/v1.2/summoner/{summonerId}/runes";
+        private const string API_URL_SUMMONERNAMES = @"api/lol/{region}/v1.2/summoner/{summonerIds}/name";
 
         private RestClient _client;
 

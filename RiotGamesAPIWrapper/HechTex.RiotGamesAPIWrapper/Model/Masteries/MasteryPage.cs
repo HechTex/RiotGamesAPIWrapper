@@ -9,6 +9,11 @@ namespace HechTex.RiotGamesAPIWrapper.Model.Masteries
     public class MasteryPage
     {
         /// <summary>
+        /// Mastery page ID.
+        /// </summary>
+        public long Id { get; set; }
+
+        /// <summary>
         /// Mastery page name.
         /// </summary>
         public string Name { get; set; }
