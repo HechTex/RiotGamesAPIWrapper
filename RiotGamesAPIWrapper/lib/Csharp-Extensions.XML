@@ -53,6 +53,162 @@
             </summary>
             <param name="message">The message to be displayed.</param>
         </member>
+        <member name="P:CsExtensions.Constructs.Tree.ITreeKnot`1.Key">
+            <summary>
+            The Key.
+            </summary>
+        </member>
+        <member name="P:CsExtensions.Constructs.Tree.ITreeLeaf`2.Value">
+            <summary>
+            The Value.
+            </summary>
+        </member>
+        <member name="M:CsExtensions.Constructs.Tree.ITreeNode`2.Add(`1)">
+            <summary>
+            Adds the given <typeparamref name="TKnot"/>
+            to the node with the corresponding key.
+            </summary>
+            <param name="knot">The knot.</param>
+        </member>
+        <member name="M:CsExtensions.Constructs.Tree.ITreeNode`2.Remove(`0)">
+            <summary>
+            Removes the element, specified by the given
+            key, from the node.
+            </summary>
+            <param name="key">The key for the element to
+            be removed.</param>
+        </member>
+        <member name="M:CsExtensions.Constructs.Tree.ITreeNode`2.Contains(`0)">
+            <summary>
+            Shows, whether the given key is in the
+            current node or not.
+            </summary>
+            <param name="key">The key to look after.</param>
+            <returns>True, if a node with this key exists,
+            else false.</returns>
+        </member>
+        <member name="P:CsExtensions.Constructs.Tree.ITreeNode`2.Nodes">
+            <summary>
+            The Nodes.
+            </summary>
+        </member>
+        <member name="P:CsExtensions.Constructs.Tree.ITreeNode`2.Item(`0)">
+            <summary>
+            Gets or sets the <typeparamref name="TKnot"/>
+            with the given key.
+            </summary>
+            <param name="key">The key.</param>
+            <returns>The corresponding <typeparamref name="TKnot"/></returns>
+        </member>
+        <member name="P:CsExtensions.Constructs.Tree.ITreeNode`2.Count">
+            <summary>
+            Returns the number of leaves from this node.
+            </summary>
+        </member>
+        <member name="M:CsExtensions.Constructs.Tree.HashNode`2.Add(`1)">
+            <inheritdoc />
+        </member>
+        <member name="M:CsExtensions.Constructs.Tree.HashNode`2.Remove(`0)">
+            <inheritdoc />
+        </member>
+        <member name="M:CsExtensions.Constructs.Tree.HashNode`2.Contains(`0)">
+            <inheritdoc />
+        </member>
+        <member name="M:CsExtensions.Constructs.Tree.HashNode`2.GetEnumerator">
+            <inheritdoc />
+        </member>
+        <member name="M:CsExtensions.Constructs.Tree.HashNode`2.System#Collections#IEnumerable#GetEnumerator">
+            <inheritdoc />
+        </member>
+        <member name="P:CsExtensions.Constructs.Tree.HashNode`2.Key">
+            <inheritdoc />
+        </member>
+        <member name="P:CsExtensions.Constructs.Tree.HashNode`2.Nodes">
+            <inheritdoc />
+        </member>
+        <member name="P:CsExtensions.Constructs.Tree.HashNode`2.Item(`0)">
+            <inheritdoc />
+        </member>
+        <member name="P:CsExtensions.Constructs.Tree.HashNode`2.Count">
+            <inheritdoc />
+        </member>
+        <member name="T:CsExtensions.Constructs.Tree.IMultipleKeysTree`2">
+            <summary>
+            A simple interface for trees.<para/>
+            The access to the values might differ in
+            chose implementation.
+            </summary>
+        </member>
+        <member name="M:CsExtensions.Constructs.Tree.IMultipleKeysTree`2.Add(`1,`0[])">
+            <summary>
+            Adds the given value to the tree
+            with the corresponding key(s).
+            </summary>
+            <param name="value">The value to add.</param>
+            <param name="keys">The key(s).</param>
+            <returns>True, if successful, else false.</returns>
+        </member>
+        <member name="M:CsExtensions.Constructs.Tree.IMultipleKeysTree`2.Remove(`0[])">
+            <summary>
+            Removes the value with the specified
+            key(s) from the tree.
+            </summary>
+            <param name="keys">The key(s).</param>
+        </member>
+        <member name="M:CsExtensions.Constructs.Tree.IMultipleKeysTree`2.Contains(`0[])">
+            <summary>
+            Whether the given key(s) are used in
+            this tree or not.
+            </summary>
+            <param name="keys">The key(s).</param>
+            <returns>True if a value is paired to the
+            key(s), else false.</returns>
+        </member>
+        <member name="M:CsExtensions.Constructs.Tree.IMultipleKeysTree`2.Contains(`1)">
+            <summary>
+            Whether the given value is stored
+            in this tree or not.
+            </summary>
+            <param name="value">The value.</param>
+            <returns>True if value is found in
+            this tree, else false.</returns>
+        </member>
+        <member name="P:CsExtensions.Constructs.Tree.IMultipleKeysTree`2.Item(`0[])">
+            <summary>
+            Gets or sets the value with the given key(s).<para/>
+            The keys have to point to a leaf.
+            </summary>
+            <param name="keys">The key(s).</param>
+            <returns>The corresponding value.</returns>
+        </member>
+        <member name="P:CsExtensions.Constructs.Tree.IMultipleKeysTree`2.Count">
+            <summary>
+            Returns the number of leaves/values.
+            </summary>
+        </member>
+        <member name="M:CsExtensions.Constructs.Tree.MultipleHashTree`2.Add(`1,`0[])">
+            <inheritdoc />
+        </member>
+        <member name="M:CsExtensions.Constructs.Tree.MultipleHashTree`2.Remove(`0[])">
+            <inheritdoc />
+        </member>
+        <member name="M:CsExtensions.Constructs.Tree.MultipleHashTree`2.Contains(`0[])">
+            <inheritdoc />
+        </member>
+        <member name="M:CsExtensions.Constructs.Tree.MultipleHashTree`2.Contains(`1)">
+            <inheritdoc />
+        </member>
+        <member name="M:CsExtensions.Constructs.Tree.MultipleHashTree`2.Contains(CsExtensions.Constructs.Tree.ITreeKnot{`0},`1)">
+            <summary>
+            Help-method for recursive contains.
+            </summary>
+        </member>
+        <member name="P:CsExtensions.Constructs.Tree.MultipleHashTree`2.Item(`0[])">
+            <inheritdoc />
+        </member>
+        <member name="P:CsExtensions.Constructs.Tree.MultipleHashTree`2.Count">
+            <inheritdoc />
+        </member>
         <member name="M:CsExtensions.GeneralExtensions.Raise``1(System.EventHandler{``0},System.Object,``0)">
             <summary>
             Easy and save method to raise
