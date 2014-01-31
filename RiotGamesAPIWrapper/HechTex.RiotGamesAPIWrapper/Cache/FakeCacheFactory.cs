@@ -20,19 +20,16 @@ namespace HechTex.RiotGamesAPIWrapper.Cache
             : base(key, settings)
         { }
 
-        /// <inheritdoc />
         internal override IList<Champion> GetChampions(Regions region)
         {
             return ApiCaller.GetChampions(region);
         }
 
-        /// <inheritdoc />
         internal override IList<RunePage> GetRunePages(Regions region, long summonerId)
         {
             return ApiCaller.GetRunePages(region, summonerId);
         }
 
-        /// <inheritdoc />
         internal override IList<SummonerName> GetSummonerNames(Regions region, IEnumerable<long> summonerIds)
         {
             return ApiCaller.GetSummonerNames(region, summonerIds);

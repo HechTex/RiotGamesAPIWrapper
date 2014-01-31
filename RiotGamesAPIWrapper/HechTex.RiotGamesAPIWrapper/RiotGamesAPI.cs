@@ -51,7 +51,8 @@ namespace HechTex.RiotGamesAPIWrapper
             CacheSettings = new CacheSettings();    // dj | if not using a reference, the updating would be to long-winded.
             
             // TODO | dj | Maybe here it could be possible to select the factory?
-            _cacheFactory = new FakeCacheFactory(key, CacheSettings);
+            //_cacheFactory = new FakeCacheFactory(key, CacheSettings);
+            _cacheFactory = new TreeCacheFactory(key, CacheSettings);
         }
 
         /// <summary>

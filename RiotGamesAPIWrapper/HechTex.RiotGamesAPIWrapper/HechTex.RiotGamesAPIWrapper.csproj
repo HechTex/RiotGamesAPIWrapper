@@ -55,6 +55,7 @@
     <Compile Include="Cache\CacheMethod.cs" />
     <Compile Include="Cache\CacheSettings.cs" />
     <Compile Include="Cache\FakeCacheFactory.cs" />
+    <Compile Include="Cache\TreeCacheFactory.cs" />
     <Compile Include="KeyLoader\KeyLoaderFactory.cs" />
     <Compile Include="APIConstants.cs" />
     <Compile Include="Model\Champion.cs" />

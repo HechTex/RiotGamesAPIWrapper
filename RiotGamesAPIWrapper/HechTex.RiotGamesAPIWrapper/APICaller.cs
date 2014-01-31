@@ -10,6 +10,7 @@ namespace HechTex.RiotGamesAPIWrapper
 {
     internal class APICaller
     {
+        // TODO upgrade api-versions!!!
         private const string API_BASE_URL = @"https://prod.api.pvp.net/";
         private const string API_URL_CHAMPION = @"api/lol/{region}/v1.1/champion";
         private const string API_URL_RUNEPAGES = @"api/lol/{region}/v1.2/summoner/{summonerId}/runes";

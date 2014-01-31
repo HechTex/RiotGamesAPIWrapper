@@ -35,14 +35,12 @@ namespace HechTex.RiotGamesAPIWrapper.Cache
             _summonerNamesCaches = new Dictionary<CacheMethod,AbstractCache<IList<SummonerName>>>();
         }
 
-        /// <inheritdoc />
         internal override IList<Champion> GetChampions(Regions region)
         {
             return CallCache<IList<Champion>>(_championCaches,
                 () => ApiCaller.GetChampions(region), Settings.GetChampions);
         }
 
-        /// <inheritdoc />
         internal override IList<RunePage> GetRunePages(Regions region, long summonerId)
         {
             return CallCache<IList<RunePage>>(_runePageCaches,
@@ -50,7 +48,6 @@ namespace HechTex.RiotGamesAPIWrapper.Cache
                 Settings.GetRunePages);
         }
 
-        /// <inheritdoc />
         internal override IList<SummonerName> GetSummonerNames(Regions region,
             IEnumerable<long> summonerIds)
         {
