@@ -1,7 +1,10 @@
-﻿// ReSharper disable once CheckNamespace
+﻿using System;
+
+// ReSharper disable once CheckNamespace
 namespace HechTex.RiotGamesAPIWrapper.APIConstants
 {
-    public enum MatchmakingQueues
+    [Obsolete]
+    public enum MatchmakingQueues // TODO | dj | they seem to be gone/replaced by subtypes
     {
         Normal5v5Blind          = 2,
         RankedSolo5v5           = 4,
@@ -18,6 +21,23 @@ namespace HechTex.RiotGamesAPIWrapper.APIConstants
         ARAMCoopVsAI            = 67
     }
 
+    public enum SubTypes
+    {
+        NONE                    = 0,
+        NORMAL                  = 1,
+        NORMAL_3x3              = 2,
+        ODIN_UNRANKED           = 3,
+        ARAM_UNRANKED_5x5       = 4,
+        BOT                     = 6,
+        BOT_3x3                 = 7,
+        RANKED_SOLO_5x5         = 8,
+        RANKED_TEAM_3x3         = 9,
+        RANKED_TEAM_5x5         = 10,
+        ONEFORALL_5x5           = 11,
+        FIRSTBLOOD_1x1          = 12,
+        FIRSTBLOOD_2x2          = 13
+    }
+
     public enum Maps
     {
         SR              = 1,
@@ -29,12 +49,21 @@ namespace HechTex.RiotGamesAPIWrapper.APIConstants
         HowlingAbyss    = 12
     }
 
-    public enum GameTypes
+    public enum GameModes
     {
-        CUSTOM_GAME = 0,
+        CLASSIC     = 0,
         ODIN        = 1,
         ARAM        = 2,
-        TURORIAL    = 3
+        TURORIAL    = 3,
+        ONEFORALL   = 4,
+        FIRSTBLOOD  = 5
+    }
+
+    public enum GameTypes
+    {
+        CUSTOM_GAME     = 0,
+        TUTORIAL_GAME   = 1,
+        MATCHED_GAME    = 2
     }
 
     public enum Regions
