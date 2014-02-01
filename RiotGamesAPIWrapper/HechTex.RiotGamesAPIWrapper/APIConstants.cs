@@ -44,6 +44,10 @@ namespace HechTex.RiotGamesAPIWrapper.APIConstants
         EUNE    = 1,
         EUW     = 2,
         NA      = 3,
-        TR      = 4
+        TR      = 4,
+        KR      = 5,
+        LAN     = 6,
+        OCE     = 7,
+        RU      = 8
     }
 }
