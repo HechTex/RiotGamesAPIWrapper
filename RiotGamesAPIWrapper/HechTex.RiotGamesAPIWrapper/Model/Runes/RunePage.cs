@@ -11,7 +11,7 @@ namespace HechTex.RiotGamesAPIWrapper.Model.Runes
         /// <summary>
         /// Rune page id.
         /// </summary>
-        public int Id { get; set; }
+        public long Id { get; set; }
 
         /// <summary>
         /// Rune page name.

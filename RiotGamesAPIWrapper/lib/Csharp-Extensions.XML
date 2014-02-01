@@ -136,7 +136,7 @@
             <summary>
             A simple interface for trees.<para/>
             The access to the values might differ in
-            chose implementation.
+            chosen implementation.
             </summary>
         </member>
         <member name="M:CsExtensions.Constructs.Tree.IMultipleKeysTree`2.Add(`1,`0[])">

@@ -17,13 +17,13 @@ namespace HechTex.RiotGamesAPIWrapper.Cache
     internal class TreeCacheFactory : AbstractCacheFactory
     {
         /* TODO:
-         * - storing
-         * - automatic clearing (put a timestamp onto it)
-         * - maybe forced clear possible
+         * [x] storing
+         * [ ] automatic clearing (put a timestamp onto it)
+         * [ ] maybe forced clear possible
          */
 
         private Dictionary<Regions, IList<Champion>> _champions;
-        private IMultipleKeysTree<string, IList<RunePage>> _runePages;
+        private IMultipleKeysTree<string, RunePages> _runePages;
         private IMultipleKeysTree<string, Summoner> _summoners;
         private IMultipleKeysTree<string, SummonerName> _summonerNames;
 
@@ -36,7 +36,7 @@ namespace HechTex.RiotGamesAPIWrapper.Cache
         private void InitializeHashContainer()
         {
             _champions = new Dictionary<Regions, IList<Champion>>();
-            _runePages = new MultipleHashTree<string, IList<RunePage>>();
+            _runePages = new MultipleHashTree<string, RunePages>();
             _summoners = new MultipleHashTree<string, Summoner>();
             _summonerNames = new MultipleHashTree<string, SummonerName>();
         }
@@ -49,18 +49,24 @@ namespace HechTex.RiotGamesAPIWrapper.Cache
             return _champions[region];
         }
 
-        internal override IList<RunePage> GetRunePages(
-            Regions region, long summonerId)
+        internal override IList<RunePages> GetRunePages(
+            Regions region, IEnumerable<long> summonerIds)
         {
+            IList<RunePages> pages = new List<RunePages>();
+            List<long> toBeFetched = new List<long>();
             string reg = region.ToString();
-            string id = summonerId.ToString();
+            
+            foreach (long id in summonerIds)
+                if (!_runePages.Contains(reg, id.ToString()))
+                    toBeFetched.Add(id);
 
-            if (!_runePages.Contains(reg, id))
-                _runePages.Add(ApiCaller.GetRunePages(region, summonerId),
-                    reg, id);
+            foreach (RunePages item in ApiCaller.GetRunePages(region, toBeFetched))
+                _runePages.Add(item, reg, item.SummonerId.ToString());
 
-            return _runePages[reg, id];
+            foreach (long id in summonerIds)
+                pages.Add(_runePages[reg, id.ToString()]);
 
+            return pages;
         }
 
         internal override IList<SummonerName> GetSummonerNames(
@@ -101,6 +107,25 @@ namespace HechTex.RiotGamesAPIWrapper.Cache
             }
 
             return names;
+        }
+
+        internal override IList<Summoner> GetSummoners(Regions region, IEnumerable<long> summonerIds)
+        {
+            IList<Summoner> summoners = new List<Summoner>();
+            List<long> toBeFetched = new List<long>();
+            string reg = region.ToString();
+
+            foreach (long id in summonerIds)
+                if (!_summoners.Contains(reg, id.ToString()))
+                    toBeFetched.Add(id);
+
+            foreach (Summoner item in ApiCaller.GetSummoners(region, toBeFetched))
+                _summoners.Add(item, reg, item.Id.ToString());
+
+            foreach (long id in summonerIds)
+                summoners.Add(_summoners[reg, id.ToString()]);
+
+            return summoners;
         }
     }
 }

@@ -63,6 +63,7 @@
     <Compile Include="Model\Masteries\Mastery.cs" />
     <Compile Include="Model\Runes\Rune.cs" />
     <Compile Include="Model\Runes\RunePage.cs" />
+    <Compile Include="Model\Runes\RunePages.cs" />
     <Compile Include="Model\Runes\RuneSlot.cs" />
     <Compile Include="Model\Summoner.cs" />
     <Compile Include="Model\SummonerName.cs" />

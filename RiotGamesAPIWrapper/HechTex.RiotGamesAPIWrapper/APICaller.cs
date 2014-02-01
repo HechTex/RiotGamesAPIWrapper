@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using CsExtensions;
 using HechTex.RiotGamesAPIWrapper.APIConstants;
 using HechTex.RiotGamesAPIWrapper.Model;
@@ -12,9 +13,10 @@ namespace HechTex.RiotGamesAPIWrapper
     {
         // TODO upgrade api-versions!!!
         private const string API_BASE_URL = @"https://prod.api.pvp.net/";
-        private const string API_URL_CHAMPION = @"api/lol/{region}/v1.1/champion";
-        private const string API_URL_RUNEPAGES = @"api/lol/{region}/v1.2/summoner/{summonerId}/runes";
-        private const string API_URL_SUMMONERNAMES = @"api/lol/{region}/v1.2/summoner/{summonerIds}/name";
+        private const string API_URL_CHAMPIONS = @"api/lol/{region}/v1.1/champion"; // nearly deprecated
+        private const string API_URL_RUNEPAGES = @"api/lol/{region}/v1.3/summoner/{summonerIds}/runes";
+        private const string API_URL_SUMMONERNAMES = @"api/lol/{region}/v1.2/summoner/{summonerIds}/name"; // TODO v1.3 not working with models (dict. of id and name)
+        private const string API_URL_SUMMONERS = @"api/lol/{region}/v1.3/summoner/{summonerIds}";
 
         private RestClient _client;
 
@@ -34,20 +36,21 @@ namespace HechTex.RiotGamesAPIWrapper
         internal IList<Champion> GetChampions(Regions region)
         {
             var urlsegs = new Dictionary<string, string> { { "region", GetRegionString(region) } }; // dat syntax
-            return CallAPI<List<Champion>>(API_URL_CHAMPION, urlsegs, "champions");
+            return CallAPI<List<Champion>>(API_URL_CHAMPIONS, urlsegs, "champions");
         }
 
         /// <summary>
         /// Returns the list of runepages of a summoner.
         /// </summary>
         /// <param name="region">Region to search in.</param>
-        /// <param name="summonerId">The summoner's id.</param>
+        /// <param name="summonerIds">The summoner's ids.</param>
         /// <returns>List of RunePages.</returns>
-        internal IList<RunePage> GetRunePages(Regions region, long summonerId)
+        internal IList<RunePages> GetRunePages(Regions region, IEnumerable<long> summonerIds)
         {
             var urlsegs = new Dictionary<string, string> {
-                { "region", GetRegionString(region) }, { "summonerId", summonerId.ToString() } };
-            return CallAPI<List<RunePage>>(API_URL_RUNEPAGES, urlsegs, "pages");
+                { "region", GetRegionString(region) }, { "summonerIds", ",".Join(summonerIds) } };
+            var res = CallAPI<Dictionary<string, RunePages>>(API_URL_RUNEPAGES, urlsegs, null);
+            return GetValues(res);
         }
 
         /// <summary>
@@ -62,6 +65,20 @@ namespace HechTex.RiotGamesAPIWrapper
             var urlsegs = new Dictionary<string, string> {
                 { "region", GetRegionString(region) }, { "summonerIds", ",".Join(summonerIds) } };
             return CallAPI<List<SummonerName>>(API_URL_SUMMONERNAMES, urlsegs, "summoners");
+        }
+
+        /// <summary>
+        /// Returns a list of the requested summoners.
+        /// </summary>
+        /// <param name="region">Region to search in.</param>
+        /// <param name="summonerIds">The summoner's ids.</param>
+        /// <returns>List of Summoners.</returns>
+        internal IList<Summoner> GetSummoners(Regions region, IEnumerable<long> summonerIds)
+        {
+            var urlsegs = new Dictionary<string, string> {
+                { "region", GetRegionString(region) }, { "summonerIds", ",".Join(summonerIds) } };
+            var res = CallAPI<Dictionary<string, Summoner>>(API_URL_SUMMONERS, urlsegs, null);
+            return GetValues(res);
         }
 
         #region Helpmethods
@@ -92,6 +109,11 @@ namespace HechTex.RiotGamesAPIWrapper
         private string GetRegionString(Regions region)
         {
             return Enum.GetName(typeof(Regions), region).ToLower();
+        }
+
+        private IList<T> GetValues<T>(Dictionary<string, T> dict)
+        {
+            return dict.Select(pair => pair.Value).ToList();
         }
 
         #endregion

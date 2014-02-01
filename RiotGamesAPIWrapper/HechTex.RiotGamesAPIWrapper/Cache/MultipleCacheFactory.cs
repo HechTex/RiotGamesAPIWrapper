@@ -19,7 +19,7 @@ namespace HechTex.RiotGamesAPIWrapper.Cache
             "The requested cache-method '{0}' is not supported for this request.";
 
         private Dictionary<CacheMethod, AbstractCache<IList<Champion>>> _championCaches;
-        private Dictionary<CacheMethod, AbstractCache<IList<RunePage>>> _runePageCaches;
+        private Dictionary<CacheMethod, AbstractCache<IList<RunePages>>> _runePageCaches;
         private Dictionary<CacheMethod, AbstractCache<IList<SummonerName>>> _summonerNamesCaches;
 
         internal MultipleCacheFactory(string key, CacheSettings settings)
@@ -31,7 +31,7 @@ namespace HechTex.RiotGamesAPIWrapper.Cache
         private void InitializeDictionaries()
         {
             _championCaches = new Dictionary<CacheMethod, AbstractCache<IList<Champion>>>();
-            _runePageCaches = new Dictionary<CacheMethod, AbstractCache<IList<RunePage>>>();
+            _runePageCaches = new Dictionary<CacheMethod, AbstractCache<IList<RunePages>>>();
             _summonerNamesCaches = new Dictionary<CacheMethod,AbstractCache<IList<SummonerName>>>();
         }
 
@@ -41,9 +41,9 @@ namespace HechTex.RiotGamesAPIWrapper.Cache
                 () => ApiCaller.GetChampions(region), Settings.GetChampions);
         }
 
-        internal override IList<RunePage> GetRunePages(Regions region, long summonerId)
+        internal override IList<RunePages> GetRunePages(Regions region, IEnumerable<long> summonerId)
         {
-            return CallCache<IList<RunePage>>(_runePageCaches,
+            return CallCache<IList<RunePages>>(_runePageCaches,
                 () => ApiCaller.GetRunePages(region, summonerId),
                 Settings.GetRunePages);
         }
@@ -54,6 +54,12 @@ namespace HechTex.RiotGamesAPIWrapper.Cache
             return CallCache<IList<SummonerName>>(_summonerNamesCaches,
                 () => ApiCaller.GetSummonerNames(region, summonerIds),
                 Settings.GetSummonerNames);
+        }
+
+        internal override IList<Summoner> GetSummoners(Regions region, IEnumerable<long> summonerIds)
+        {
+            // TODO implement!
+            throw new NotImplementedException();
         }
 
         #region Helpmethods

@@ -32,9 +32,9 @@ namespace HechTex.RiotGamesAPIWrapper.Cache
         /// filtered/provided by the chosen cache.
         /// </summary>
         /// <param name="region">The region.</param>
-        /// <param name="summonerId">The summoner's id.</param>
-        abstract internal IList<RunePage> GetRunePages(Regions region,
-            long summonerId);
+        /// <param name="summonerIds">The summoner's ids.</param>
+        abstract internal IList<RunePages> GetRunePages(Regions region,
+            IEnumerable<long> summonerIds);
 
         /// <summary>
         /// Returns the result of APICaller.GetSummonerNames,
@@ -43,6 +43,16 @@ namespace HechTex.RiotGamesAPIWrapper.Cache
         /// <param name="region">The region.</param>
         /// <param name="summonerIds">The summoner's ids.</param>
         abstract internal IList<SummonerName> GetSummonerNames(Regions region,
+            IEnumerable<long> summonerIds);
+
+        /// <summary>
+        /// Returns the result of APICaller.GetSummoners,
+        /// filtered/provided by the chosen cache.
+        /// </summary>
+        /// <param name="region">The region.</param>
+        /// <param name="summonerIds">The summoner's ids.</param>
+        /// <returns></returns>
+        abstract internal IList<Summoner> GetSummoners(Regions region,
             IEnumerable<long> summonerIds);
     }
 }

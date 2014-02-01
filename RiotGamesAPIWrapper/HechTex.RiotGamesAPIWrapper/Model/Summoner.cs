@@ -33,6 +33,6 @@ namespace HechTex.RiotGamesAPIWrapper.Model
         /// <summary>
         /// Summoner level associated with the summoner.
         /// </summary>
-        public long SummonerLevel { get; set; } // TODO | dj | long?
+        public long SummonerLevel { get; set; }
     }
 }

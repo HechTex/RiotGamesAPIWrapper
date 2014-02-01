@@ -75,13 +75,13 @@ namespace HechTex.RiotGamesAPIWrapper
         /// a moment.
         /// </summary>
         /// <param name="region">Region to search in.</param>
-        /// <param name="summonerId">The summoner's id for whom
+        /// <param name="summonerIds">The summoner's ids for which
         /// to search.</param>
         /// <returns>List of RunePages.<para/>
         /// Returns null, if no items/no connection.</returns>
-        public IList<RunePage> GetRunePages(Regions region, long summonerId)
+        public IList<RunePages> GetRunePages(Regions region, IEnumerable<long> summonerIds)
         {
-            return _cacheFactory.GetRunePages(region, summonerId);
+            return _cacheFactory.GetRunePages(region, summonerIds);
         }
 
         /// <summary>
@@ -89,7 +89,7 @@ namespace HechTex.RiotGamesAPIWrapper
         /// Depending on cache-mode, this might take a moment.
         /// </summary>
         /// <param name="region">Region to search in.</param>
-        /// <param name="summonerIds">The summoner's ids for whom
+        /// <param name="summonerIds">The summoner's ids for which
         /// the names will be fetched.</param>
         /// <returns>List of SummonerNames.<para/>
         /// Returns null, if no items/no connection.</returns>
@@ -97,6 +97,21 @@ namespace HechTex.RiotGamesAPIWrapper
             IEnumerable<long> summonerIds)
         {
             return _cacheFactory.GetSummonerNames(region, summonerIds);
+        }
+
+        /// <summary>
+        /// Returns the summoners to the given ids.
+        /// Depending on cache-mode, this might take a moment.
+        /// </summary>
+        /// <param name="region">Region to search in.</param>
+        /// <param name="summonerIds">The summoner's ids for which
+        /// to gather the information.</param>
+        /// <returns>List of Summoners.<para />
+        /// Returns null, if no items/no connection.</returns>
+        public IList<Summoner> GetSummoners(Regions region,
+            IEnumerable<long> summonerIds)
+        {
+            return _cacheFactory.GetSummoners(region, summonerIds);
         }
     }
 }

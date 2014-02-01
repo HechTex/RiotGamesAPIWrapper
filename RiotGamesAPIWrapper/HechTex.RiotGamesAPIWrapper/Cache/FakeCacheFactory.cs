@@ -25,14 +25,19 @@ namespace HechTex.RiotGamesAPIWrapper.Cache
             return ApiCaller.GetChampions(region);
         }
 
-        internal override IList<RunePage> GetRunePages(Regions region, long summonerId)
+        internal override IList<RunePages> GetRunePages(Regions region, IEnumerable<long> summonerIds)
         {
-            return ApiCaller.GetRunePages(region, summonerId);
+            return ApiCaller.GetRunePages(region, summonerIds);
         }
 
         internal override IList<SummonerName> GetSummonerNames(Regions region, IEnumerable<long> summonerIds)
         {
             return ApiCaller.GetSummonerNames(region, summonerIds);
+        }
+
+        internal override IList<Summoner> GetSummoners(Regions region, IEnumerable<long> summonerIds)
+        {
+            return ApiCaller.GetSummoners(region, summonerIds);
         }
     }
 }

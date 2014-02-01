@@ -46,7 +46,7 @@ namespace HechTex.Test
         public static void TestGetRunePages()
         {
             RiotGamesAPI api = new RiotGamesAPI(null);
-            var result = api.GetRunePages(Regions.EUW, SUMMONERID);
+            var result = api.GetRunePages(Regions.EUW, new long[] { SUMMONERID, SUMMONERID2 });
             Console.WriteLine("Runepages:");
             foreach (var page in result)
                 Console.WriteLine(page.GetInfoString());
@@ -63,6 +63,18 @@ namespace HechTex.Test
                 Console.WriteLine(name.GetInfoString());
         }
 
+        [DynamicTestConsole.Comment("Test to get summoners by ids.")]
+        public static void TestGetSummoners()
+        {
+            RiotGamesAPI api = new RiotGamesAPI(null);
+            var result = api.GetSummoners(Regions.EUW,
+                new long[] { SUMMONERID, SUMMONERID2 });
+            Console.WriteLine("Summoners:");
+            foreach (var name in result)
+                Console.WriteLine(name.GetInfoString());
+        }
+
+        [Obsolete]
         [DynamicTestConsole.Comment("Testing the TimedCache. CONSUMES: time, response")]
         public static void TestTimedCache()
         {
