@@ -15,7 +15,7 @@ namespace HechTex.RiotGamesAPIWrapper
         private const string API_BASE_URL = @"https://prod.api.pvp.net/";
         private const string API_URL_CHAMPIONS = @"api/lol/{region}/v1.1/champion"; // nearly deprecated
         private const string API_URL_RUNEPAGES = @"api/lol/{region}/v1.3/summoner/{summonerIds}/runes";
-        private const string API_URL_SUMMONERNAMES = @"api/lol/{region}/v1.2/summoner/{summonerIds}/name"; // TODO v1.3 not working with models (dict. of id and name)
+        private const string API_URL_SUMMONERNAMES = @"api/lol/{region}/v1.3/summoner/{summonerIds}/name";
         private const string API_URL_SUMMONERS = @"api/lol/{region}/v1.3/summoner/{summonerIds}";
 
         private RestClient _client;
@@ -64,7 +64,13 @@ namespace HechTex.RiotGamesAPIWrapper
         {
             var urlsegs = new Dictionary<string, string> {
                 { "region", GetRegionString(region) }, { "summonerIds", ",".Join(summonerIds) } };
-            return CallAPI<List<SummonerName>>(API_URL_SUMMONERNAMES, urlsegs, "summoners");
+            var res = CallAPI<Dictionary<string, string>>(API_URL_SUMMONERNAMES, urlsegs, null);
+            return res.Select(pair => {
+                var s = new SummonerName();
+                s.Id = long.Parse(pair.Key);
+                s.Name = pair.Value;
+                return s;
+            }).ToList<SummonerName>();
         }
 
         /// <summary>
