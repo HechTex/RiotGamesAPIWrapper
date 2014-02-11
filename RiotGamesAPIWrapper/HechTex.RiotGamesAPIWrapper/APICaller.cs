@@ -4,6 +4,7 @@ using System.Linq;
 using CsExtensions;
 using HechTex.RiotGamesAPIWrapper.APIConstants;
 using HechTex.RiotGamesAPIWrapper.Model;
+using HechTex.RiotGamesAPIWrapper.Model.Masteries;
 using HechTex.RiotGamesAPIWrapper.Model.Runes;
 using RestSharp;
 
@@ -15,6 +16,7 @@ namespace HechTex.RiotGamesAPIWrapper
         private const string API_BASE_URL = @"https://prod.api.pvp.net/";
         private const string API_URL_CHAMPIONS = @"api/lol/{region}/v1.1/champion"; // nearly deprecated
         private const string API_URL_RUNEPAGES = @"api/lol/{region}/v1.3/summoner/{summonerIds}/runes";
+        private const string API_URL_MASTERYPAGES = @"api/lol/{region}/v1.3/summoner/{summonerIds}/masteries";
         private const string API_URL_SUMMONERNAMES = @"api/lol/{region}/v1.3/summoner/{summonerIds}/name";
         private const string API_URL_SUMMONERS = @"api/lol/{region}/v1.3/summoner/{summonerIds}";
 
@@ -40,7 +42,7 @@ namespace HechTex.RiotGamesAPIWrapper
         }
 
         /// <summary>
-        /// Returns the list of runepages of a summoner.
+        /// Returns the list of runepages of the summoner(s).
         /// </summary>
         /// <param name="region">Region to search in.</param>
         /// <param name="summonerIds">The summoner's ids.</param>
@@ -50,6 +52,20 @@ namespace HechTex.RiotGamesAPIWrapper
             var urlsegs = new Dictionary<string, string> {
                 { "region", GetRegionString(region) }, { "summonerIds", ",".Join(summonerIds) } };
             var res = CallAPI<Dictionary<string, RunePages>>(API_URL_RUNEPAGES, urlsegs, null);
+            return GetValues(res);
+        }
+
+        /// <summary>
+        /// Returns the list of masterypages of the summoner(s).
+        /// </summary>
+        /// <param name="region">Region to search in.</param>
+        /// <param name="summonerIds">The summoner's ids.</param>
+        /// <returns>List of MasteryPages.</returns>
+        internal IList<MasteryPages> GetMasteryPages(Regions region, IEnumerable<long> summonerIds)
+        {
+            var urlsegs = new Dictionary<string, string> {
+                { "region", GetRegionString(region) }, { "summonerIds", ",".Join(summonerIds) } };
+            var res = CallAPI<Dictionary<string, MasteryPages>>(API_URL_MASTERYPAGES, urlsegs, null);
             return GetValues(res);
         }
 

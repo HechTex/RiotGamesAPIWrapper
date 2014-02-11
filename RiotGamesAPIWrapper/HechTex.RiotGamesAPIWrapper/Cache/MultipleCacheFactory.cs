@@ -4,6 +4,7 @@ using CsExtensions;
 using HechTex.RiotGamesAPIWrapper.APIConstants;
 using HechTex.RiotGamesAPIWrapper.Cache.AbstractCacheMethod;
 using HechTex.RiotGamesAPIWrapper.Model;
+using HechTex.RiotGamesAPIWrapper.Model.Masteries;
 using HechTex.RiotGamesAPIWrapper.Model.Runes;
 
 namespace HechTex.RiotGamesAPIWrapper.Cache
@@ -46,6 +47,12 @@ namespace HechTex.RiotGamesAPIWrapper.Cache
             return CallCache<IList<RunePages>>(_runePageCaches,
                 () => ApiCaller.GetRunePages(region, summonerId),
                 Settings.GetRunePages);
+        }
+
+        internal override IList<MasteryPages> GetMasteryPages(Regions region, IEnumerable<long> summonerIds)
+        {
+            // TODO implement!
+            throw new NotImplementedException();
         }
 
         internal override IList<SummonerName> GetSummonerNames(Regions region,

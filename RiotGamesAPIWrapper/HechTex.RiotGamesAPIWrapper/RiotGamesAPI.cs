@@ -5,6 +5,7 @@ using HechTex.RiotGamesAPIWrapper.APIConstants;
 using HechTex.RiotGamesAPIWrapper.Cache;
 using HechTex.RiotGamesAPIWrapper.KeyLoader;
 using HechTex.RiotGamesAPIWrapper.Model;
+using HechTex.RiotGamesAPIWrapper.Model.Masteries;
 using HechTex.RiotGamesAPIWrapper.Model.Runes;
 
 // Access for tests granted.
@@ -71,7 +72,7 @@ namespace HechTex.RiotGamesAPIWrapper
 
         /// <summary>
         /// Returns the list of all RunePages of the specified
-        /// summoner. Depending on cache-mode, this might take
+        /// summoners. Depending on cache-mode, this might take
         /// a moment.
         /// </summary>
         /// <param name="region">Region to search in.</param>
@@ -79,9 +80,26 @@ namespace HechTex.RiotGamesAPIWrapper
         /// to search.</param>
         /// <returns>List of RunePages.<para/>
         /// Returns null, if no items/no connection.</returns>
-        public IList<RunePages> GetRunePages(Regions region, IEnumerable<long> summonerIds)
+        public IList<RunePages> GetRunePages(Regions region,
+            IEnumerable<long> summonerIds)
         {
             return _cacheFactory.GetRunePages(region, summonerIds);
+        }
+
+        /// <summary>
+        /// Returns the list of all MasteryPages of the specified
+        /// summoners. Depending on cache-mode, this might take a
+        /// moment.
+        /// </summary>
+        /// <param name="region">Region to search in.</param>
+        /// <param name="summonerIds">The summoner's ids for which
+        /// to search.</param>
+        /// <returns>List of MasteryPages.<para />
+        /// Returns null, if no items/no connection.</returns>
+        public IList<MasteryPages> GetMasteryPages(Regions region,
+            IEnumerable<long> summonerIds)
+        {
+            return _cacheFactory.GetMasteryPages(region, summonerIds);
         }
 
         /// <summary>

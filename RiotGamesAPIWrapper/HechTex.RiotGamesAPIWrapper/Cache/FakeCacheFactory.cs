@@ -5,14 +5,15 @@ using System.Text;
 using System.Threading.Tasks;
 using HechTex.RiotGamesAPIWrapper.APIConstants;
 using HechTex.RiotGamesAPIWrapper.Model;
+using HechTex.RiotGamesAPIWrapper.Model.Masteries;
 using HechTex.RiotGamesAPIWrapper.Model.Runes;
 
 namespace HechTex.RiotGamesAPIWrapper.Cache
 {
     /// <summary>
     /// A cache-factory, faking the cache. There is
-    /// cache-method used at all. It uses APICaller
-    /// directly.
+    /// no cache-method used at all.
+    /// It uses APICaller directly.
     /// </summary>
     internal class FakeCacheFactory : AbstractCacheFactory
     {
@@ -28,6 +29,11 @@ namespace HechTex.RiotGamesAPIWrapper.Cache
         internal override IList<RunePages> GetRunePages(Regions region, IEnumerable<long> summonerIds)
         {
             return ApiCaller.GetRunePages(region, summonerIds);
+        }
+
+        internal override IList<MasteryPages> GetMasteryPages(Regions region, IEnumerable<long> summonerIds)
+        {
+            return ApiCaller.GetMasteryPages(region, summonerIds);
         }
 
         internal override IList<SummonerName> GetSummonerNames(Regions region, IEnumerable<long> summonerIds)

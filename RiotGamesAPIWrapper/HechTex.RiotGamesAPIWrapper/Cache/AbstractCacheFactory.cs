@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using HechTex.RiotGamesAPIWrapper.APIConstants;
 using HechTex.RiotGamesAPIWrapper.Model;
+using HechTex.RiotGamesAPIWrapper.Model.Masteries;
 using HechTex.RiotGamesAPIWrapper.Model.Runes;
 
 namespace HechTex.RiotGamesAPIWrapper.Cache
@@ -34,6 +35,15 @@ namespace HechTex.RiotGamesAPIWrapper.Cache
         /// <param name="region">The region.</param>
         /// <param name="summonerIds">The summoner's ids.</param>
         abstract internal IList<RunePages> GetRunePages(Regions region,
+            IEnumerable<long> summonerIds);
+
+        /// <summary>
+        /// Returns the result of APICaller.GetMasteryPages,
+        /// filtered/provided by the chosen cache.
+        /// </summary>
+        /// <param name="region">The region.</param>
+        /// <param name="summonerIds">The summoner's ids.</param>
+        abstract internal IList<MasteryPages> GetMasteryPages(Regions region,
             IEnumerable<long> summonerIds);
 
         /// <summary>

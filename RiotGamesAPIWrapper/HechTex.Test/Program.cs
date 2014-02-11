@@ -52,6 +52,16 @@ namespace HechTex.Test
                 Console.WriteLine(page.GetInfoString());
         }
 
+        [DynamicTestConsole.Comment("Test to get mastery pages of a summoner.")]
+        public static void TestGetMasteryPages()
+        {
+            RiotGamesAPI api = new RiotGamesAPI(null);
+            var result = api.GetMasteryPages(Regions.EUW, new long[] { SUMMONERID, SUMMONERID2 });
+            Console.WriteLine("Masterypages:");
+            foreach (var page in result)
+                Console.WriteLine(page.GetInfoString());
+        }
+
         [DynamicTestConsole.Comment("Test to get summoner-names from ids.")]
         public static void TestGetSummonerNames()
         {
